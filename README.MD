@@ -1,3 +1,3 @@
 # Proyecto de Ingenieria de Software 2
 
-# Tablero en * Projects * 
+# Tablero en (Proyects) [https://github.com/UlmoMacias/Inge2/projects]
