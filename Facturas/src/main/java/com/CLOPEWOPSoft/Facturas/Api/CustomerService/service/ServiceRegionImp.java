@@ -14,7 +14,7 @@ import com.CLOPEWOPSoft.Facturas.Api.ExceptionHandling.ApiException;
 
 
 @Service
-public class ServicerRegionImp implements ServiceRegion {
+public class ServiceRegionImp implements ServiceRegion {
 	
 	@Autowired
 	RegionRepository regionRepository;
