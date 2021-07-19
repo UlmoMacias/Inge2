@@ -39,15 +39,19 @@ public class ServiceClienteImp implements ServiceCliente {
 
 	@Override
 	public void createCliente(Cliente cliente) {
-		clienteRepository.save(cliente);
+		clienteRepository.createCliente(
+				cliente.getNombres(), 
+				cliente.getApellidos(), 
+				cliente.getRfc(), 
+				cliente.getCorreo(), 
+				cliente.getIdRegion().getId());;
 	}
 
 	@Override
 	public void updateCliente(Cliente cliente, Integer id) {
 		try {
 			clienteRepository.updateCliente(cliente.getNombres(), 
-					cliente.getAPaterno(), 
-					cliente.getAMaterno(), 
+					cliente.getApellidos(),
 					cliente.getRfc(), 
 					cliente.getCorreo(), 
 					cliente.getIdRegion().getId(), 

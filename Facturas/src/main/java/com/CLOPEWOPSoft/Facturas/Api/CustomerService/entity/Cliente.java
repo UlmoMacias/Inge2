@@ -18,10 +18,9 @@ import lombok.Data;
 @Entity
 public class Cliente {
 	
-	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonProperty("id")
 	@Column(name = "ID")
+	@JsonProperty("id")
 	private Integer id;
 	
 	@JsonProperty("nombres")
@@ -29,16 +28,12 @@ public class Cliente {
 	@NotNull(message = "Se requiere un nombre")
 	private String nombres;
 	
-	@JsonProperty("a_paterno")
-	@Column(name = "APaterno")
-	@NotNull(message = "Se requiere el apellido paterno")
-	private String aPaterno;
+	@JsonProperty("apellidos")
+	@Column(name = "Apellidos")
+	@NotNull(message = "Se requieren los apellidos")
+	private String apellidos;
 	
-	@JsonProperty("a_materno")
-	@Column(name = "AMaterno")
-	@NotNull(message = "Se requiere el apellido materno")
-	private String aMaterno;
-	
+	@Id
 	@JsonProperty("rfc")
 	@Column(name = "RFC")
 	@NotNull(message = "Se requiere el RFC")
