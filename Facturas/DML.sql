@@ -11,3 +11,7 @@ INSERT INTO Categoria VALUES(1,"Farmacia");
 INSERT INTO Categoria VALUES(2,"Tiendita");
 
 INSERT INTO Producto VALUES(1,"0000000000000","Producto de prueba","Producto Prueba",10,10,CURRENT_DATE(),1);
+
+INSERT INTO Articulo VALUES(1,"0000000000000",10,.5,10,1);
+
+INSERT INTO Factura VALUES(1,CURRENT_DATE(),1,"ACM");

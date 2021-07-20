@@ -67,5 +67,4 @@ public class ServiceProductoImp implements ServiceProducto {
 			throw new ApiException(HttpStatus.NOT_FOUND,e.getLocalizedMessage());
 		}
 	}
-
 }

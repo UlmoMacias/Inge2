@@ -6,7 +6,7 @@ import com.CLOPEWOPSoft.Facturas.Api.ProductService.entity.Producto;
 
 public interface ServiceProducto {
 
-	public List<Producto> getProductos();
+public List<Producto> getProductos();
 	
 	public Producto getProducto(Integer id);
 	

@@ -7,3 +7,7 @@ SELECT * FROM Cliente;
 SELECT * FROM Categoria;
 
 SELECT * FROM Producto;
+
+SELECT * FROM Articulo;
+
+SELECT * FROM Factura;

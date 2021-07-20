@@ -24,6 +24,7 @@ CREATE TABLE `Factura` (
 
 CREATE TABLE `Articulo` (
   `ID` integer PRIMARY KEY AUTO_INCREMENT,
+  `Codigo` varchar(13),
   `Cantidad` integer,
   `Impuesto` float4,
   `Precio_Unitario` float4,

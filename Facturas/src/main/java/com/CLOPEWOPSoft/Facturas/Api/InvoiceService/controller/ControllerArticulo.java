@@ -1,4 +1,4 @@
-package com.CLOPEWOPSoft.Facturas.Api.ProductService.controller;
+package com.CLOPEWOPSoft.Facturas.Api.InvoiceService.controller;
 
 import java.util.List;
 
@@ -18,47 +18,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.CLOPEWOPSoft.Facturas.Api.ExceptionHandling.ApiException;
-import com.CLOPEWOPSoft.Facturas.Api.ProductService.entity.Producto;
-import com.CLOPEWOPSoft.Facturas.Api.ProductService.service.ServiceProducto;
+import com.CLOPEWOPSoft.Facturas.Api.InvoiceService.entity.Articulo;
+import com.CLOPEWOPSoft.Facturas.Api.InvoiceService.service.ServiceArticulo;
 
 @RestController
-@RequestMapping("/producto")
-public class ControllerProducto {
+@RequestMapping("/articulo")
+public class ControllerArticulo {
 
 	@Autowired
-	ServiceProducto serviceProducto;
+	ServiceArticulo serviceArticulo;
 	
 	@GetMapping
-	public ResponseEntity<List<Producto>> getProductos(){
-		return new ResponseEntity<>(serviceProducto.getProductos(),HttpStatus.OK);
+	public ResponseEntity<List<Articulo>> getArticulos(){
+		return new ResponseEntity<>(serviceArticulo.getArticulos(),HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Producto> getProducto(@PathVariable("id") Integer id){
-		return new ResponseEntity<>(serviceProducto.getProducto(id),HttpStatus.OK);
+	public ResponseEntity<Articulo> getArticulo(@PathVariable("id") Integer id){
+		return new ResponseEntity<>(serviceArticulo.getArticulo(id),HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<HttpStatus> createProducot(@Valid @RequestBody Producto producto, BindingResult bindingResult){
+	public ResponseEntity<HttpStatus> createArticulo(@Valid @RequestBody Articulo articulo, BindingResult bindingResult){
 		if(bindingResult.hasErrors()) {
 			throw new ApiException(HttpStatus.BAD_REQUEST,bindingResult.getAllErrors().get(0).getDefaultMessage());
 		}
-		serviceProducto.createProducto(producto);
+		serviceArticulo.createArticulo(articulo);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<HttpStatus> updateProduct(@Valid @RequestBody Producto producto, @PathVariable("id") Integer id, BindingResult bindingResult){
+	public ResponseEntity<HttpStatus> updateArticulo(@Valid @RequestBody Articulo articulo, BindingResult bindingResult, @PathVariable("id") Integer id){
 		if(bindingResult.hasErrors()) {
 			throw new ApiException(HttpStatus.BAD_REQUEST,bindingResult.getAllErrors().get(0).getDefaultMessage());
 		}
-		serviceProducto.updateProducto(producto, id);
+		serviceArticulo.updateArticulo(articulo, id);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<HttpStatus> deleteProducto(@PathVariable("id") Integer id){
-		serviceProducto.deleteProducto(id);
+	public ResponseEntity<HttpStatus> deleteMapping(@PathVariable Integer id){
+		serviceArticulo.deleteArticulo(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
