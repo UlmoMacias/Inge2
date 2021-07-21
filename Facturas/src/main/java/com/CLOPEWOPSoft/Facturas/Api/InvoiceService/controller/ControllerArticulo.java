@@ -33,9 +33,9 @@ public class ControllerArticulo {
 		return new ResponseEntity<>(serviceArticulo.getArticulos(),HttpStatus.OK);
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<Articulo> getArticulo(@PathVariable("id") Integer id){
-		return new ResponseEntity<>(serviceArticulo.getArticulo(id),HttpStatus.OK);
+	@GetMapping("/{codigo}")
+	public ResponseEntity<Articulo> getArticulo(@PathVariable("codigo") String codigo){
+		return new ResponseEntity<>(serviceArticulo.getArticulo(codigo),HttpStatus.OK);
 	}
 	
 	@PostMapping
@@ -47,18 +47,18 @@ public class ControllerArticulo {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<HttpStatus> updateArticulo(@Valid @RequestBody Articulo articulo, BindingResult bindingResult, @PathVariable("id") Integer id){
+	@PutMapping("/{codigo}")
+	public ResponseEntity<HttpStatus> updateArticulo(@Valid @RequestBody Articulo articulo, BindingResult bindingResult, @PathVariable("codigo") String codigo){
 		if(bindingResult.hasErrors()) {
 			throw new ApiException(HttpStatus.BAD_REQUEST,bindingResult.getAllErrors().get(0).getDefaultMessage());
 		}
-		serviceArticulo.updateArticulo(articulo, id);
+		serviceArticulo.updateArticulo(articulo, codigo);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<HttpStatus> deleteMapping(@PathVariable Integer id){
-		serviceArticulo.deleteArticulo(id);
+	@DeleteMapping("/{codigo}")
+	public ResponseEntity<HttpStatus> deleteMapping(@PathVariable("codigo") String codigo){
+		serviceArticulo.deleteArticulo(codigo);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

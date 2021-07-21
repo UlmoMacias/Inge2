@@ -27,9 +27,9 @@ public class ServiceProductoImp implements ServiceProducto {
 	}
 
 	@Override
-	public Producto getProducto(Integer id) {
+	public Producto getProducto(String codigo) {
 		try {
-			Producto p  = ((Optional<Producto>) productoRepository.findById(id)).get();
+			Producto p  = ((Optional<Producto>) productoRepository.findById(codigo)).get();
 			return p;
 		}catch(Exception e){
 			throw new ApiException(HttpStatus.NOT_FOUND,e.getLocalizedMessage());
@@ -38,31 +38,37 @@ public class ServiceProductoImp implements ServiceProducto {
 
 	@Override
 	public void createProducto(Producto producto) {
-		productoRepository.save(producto);
+		productoRepository.createProducto(
+										producto.getCodigo(),
+										producto.getNombre(), 
+										producto.getDescripcion(), 
+										producto.getCantidad(), 
+										producto.getPrecio(), 
+										producto.getFechaCreacion(), 
+										producto.getCategoria().getId());
 	}
 
 	@Override
-	public void updateProducto(Producto producto, Integer id) {
+	public void updateProducto(Producto producto, String codigo) {
 		System.out.println("Hola");
 		try {
 			productoRepository.updateProducto(
-											producto.getCodigo(),
 											producto.getNombre(), 
 											producto.getDescripcion(), 
 											producto.getCantidad(), 
 											producto.getPrecio(), 
 											producto.getFechaCreacion(), 
 											producto.getCategoria().getId(), 
-											id);
+											codigo);
 		}catch(Exception e) {
 			throw new ApiException(HttpStatus.NOT_FOUND,e.getLocalizedMessage());
 		}
 	}
 
 	@Override
-	public void deleteProducto(Integer id) {
+	public void deleteProducto(String codigo) {
 		try {
-			productoRepository.deleteById(id);
+			productoRepository.deleteById(codigo);
 		}catch(Exception e) {
 			throw new ApiException(HttpStatus.NOT_FOUND,e.getLocalizedMessage());
 		}

@@ -8,11 +8,11 @@ public interface ServiceProducto {
 
 public List<Producto> getProductos();
 	
-	public Producto getProducto(Integer id);
+	public Producto getProducto(String codigo);
 	
 	public void createProducto(Producto producto);
 	
-	public void updateProducto(Producto producto, Integer id);
+	public void updateProducto(Producto producto, String codigo);
 	
-	public void deleteProducto(Integer id);
+	public void deleteProducto(String codigo);
 }

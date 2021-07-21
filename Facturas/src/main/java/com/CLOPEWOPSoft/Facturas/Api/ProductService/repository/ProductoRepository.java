@@ -11,25 +11,40 @@ import org.springframework.data.repository.query.Param;
 
 import com.CLOPEWOPSoft.Facturas.Api.ProductService.entity.Producto;
 
-public interface ProductoRepository extends JpaRepository<Producto,Integer>{
+public interface ProductoRepository extends JpaRepository<Producto,String>{
 	
 	@Modifying
 	@Transactional
+	@Query(value = "CALL st_create_producto(:codigo , "
+			+ ":nombre ,"
+			+ ":descripcion ,"
+			+ ":cantidad ,"
+			+ ":precio ,"
+			+ ":fechaCreacion ,"
+			+ ":idCategoria )", nativeQuery = true)
+	void createProducto(@Param("codigo") String codigo,
+			@Param("nombre") String nombre,
+			@Param("descripcion") String descripcion,
+			@Param("cantidad") Integer cantidad,
+			@Param("precio") float precio,
+			@Param("fechaCreacion") LocalDate fechaCreacion,
+			@Param("idCategoria") Integer idCategoria);
+
+	@Modifying
+	@Transactional
 	@Query(value = "UPDATE Producto SET "
-			+ "Codigo = :codigo ,"
 			+ "Nombre = :nombre ,"
 			+ "Descripcion = :descripcion ,"
 			+ "Cantidad = :cantidad ,"
 			+ "Precio = :precio ,"
 			+ "fecha_creacion = :fechaCreacion ,"
 			+ "ID_Categoria = :idCategoria "
-			+ "WHERE ID = :id", nativeQuery = true)
-	void updateProducto(@Param("codigo") String codigo,
-						@Param("nombre") String nombre,
+			+ "WHERE Codigo = :codigo", nativeQuery = true)
+	void updateProducto(@Param("nombre") String nombre,
 						@Param("descripcion") String descripcion,
 						@Param("cantidad") Integer cantidad,
 						@Param("precio") float precio,
 						@Param("fechaCreacion") LocalDate fechaCreacion,
 						@Param("idCategoria") Integer idCategoria,
-						@Param("id") Integer id);
+						@Param("codigo") String codigo);
 }

@@ -4,8 +4,6 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,12 +21,11 @@ import lombok.Data;
 @Table(name = "Producto")
 public class Producto {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonProperty("id")
 	@Column(name = "ID")
 	private Integer id;
 	
+	@Id
 	@JsonProperty("codigo")
 	@Column(name = "Codigo")
 	@NotNull(message = "Se necesita un codigo para el producto")

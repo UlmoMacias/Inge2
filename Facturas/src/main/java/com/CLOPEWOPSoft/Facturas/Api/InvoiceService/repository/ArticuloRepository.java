@@ -11,7 +11,21 @@ import org.springframework.stereotype.Repository;
 import com.CLOPEWOPSoft.Facturas.Api.InvoiceService.entity.Articulo;
 
 @Repository
-public interface ArticuloRepository extends JpaRepository<Articulo,Integer>{
+public interface ArticuloRepository extends JpaRepository<Articulo,String>{
+	
+	@Modifying
+	@Transactional
+	@Query(value = "CALL st_create_articulo(:codigo , "
+			+ ":cantidad ,"
+			+ ":impuesto ,"
+			+ ":p_id_factura )"
+			, nativeQuery = true)
+	void createArticulo(@Param("codigo") String codigo,
+						@Param("cantidad") Integer cantidad,
+						@Param("impuesto") float impuesto,
+						@Param("p_id_factura") Integer p_id_factura
+						);
+	
 	
 	@Modifying
 	@Transactional
@@ -19,14 +33,11 @@ public interface ArticuloRepository extends JpaRepository<Articulo,Integer>{
 			+ "Codigo = :codigo ,"
 			+ "Cantidad = :cantidad ,"
 			+ "Impuesto = :impuesto ,"
-			+ "Precio_Unitario = :precioUnitario ,"
 			+ "ID_Factura = :idFactura "
-			+ "WHERE ID = :id", nativeQuery = true)
+			+ "WHERE Codigo = :codigo", nativeQuery = true)
 	void updateArticulo(
 						@Param("codigo") String codigo,
 						@Param("cantidad") Integer cantidad,
 						@Param("impuesto") float impuesto,
-						@Param("precioUnitario") float precioUnitario,
-						@Param("idFactura") Integer idFactura,
-						@Param("id") Integer id);
+						@Param("idFactura") Integer idFactura);
 }

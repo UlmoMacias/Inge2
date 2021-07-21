@@ -33,9 +33,9 @@ public class ServiceArticuloImp implements ServiceArticulo {
 	}
 
 	@Override
-	public Articulo getArticulo(Integer id) {
+	public Articulo getArticulo(String codigo) {
 		try {
-			Articulo a = ((Optional<Articulo>) articuloRepository.findById(id)).get();
+			Articulo a = ((Optional<Articulo>) articuloRepository.findById(codigo)).get();
 			setCostosArticulo(a);
 			return a;
 		}catch(Exception e) {
@@ -45,47 +45,49 @@ public class ServiceArticuloImp implements ServiceArticulo {
 
 	@Override
 	public void createArticulo(Articulo articulo) {
-		articuloRepository.save(articulo);
+		articuloRepository.createArticulo(
+										articulo.getCodigo(),
+										articulo.getCantidad(),
+										articulo.getImpuesto(),
+										articulo.getIdFactura());
 	}
 
 	@Override
-	public void updateArticulo(Articulo articulo, Integer id) {
+	public void updateArticulo(Articulo articulo, String codigo) {
 		try {
 			articuloRepository.updateArticulo(
 											articulo.getCodigo(), 
 											articulo.getCantidad(), 
 											articulo.getImpuesto(), 
-											articulo.getPrecioUnitario(), 
-											articulo.getIdFactura(), 
-											id);
+											articulo.getIdFactura());
 		}catch(Exception e) {
 			throw new ApiException(HttpStatus.NOT_FOUND,e.getLocalizedMessage());
 		}
 	}
 
 	@Override
-	public void deleteArticulo(Integer id) {
+	public void deleteArticulo(String codigo) {
 		try {
-			articuloRepository.deleteById(id);
+			articuloRepository.deleteById(codigo);
 		}catch(Exception e) {
 			throw new ApiException(HttpStatus.NOT_FOUND,e.getLocalizedMessage());
 		}
 	}
 	
-	private Producto getCodigoProducto(Integer id) {
+	private Producto getCodigoProducto(String codigo) {
 		try {
 			/*ResponseEntity<Producto> response = restTemplate.getForEntity(
 					"http://localhost:8080/product/"+id, Producto.class);
 			return response.getBody();*/
 			
-			return sp.getProducto(id);
+			return sp.getProducto(codigo);
 		}catch(Exception e) {
-			throw new ApiException(HttpStatus.NOT_FOUND,"El id "+ id+" no es valido");
+			throw new ApiException(HttpStatus.NOT_FOUND,"El id "+ codigo+" no es valido");
 		}
 	}
 	
 	private void setCostosArticulo(Articulo articulo) {
-		Producto p = getCodigoProducto(articulo.getId());
+		Producto p = getCodigoProducto(articulo.getCodigo());
 		articulo.setPrecioUnitario(p.getPrecio());
 		articulo.setSubTotal(p.getPrecio()*articulo.getCantidad());
 		System.out.println(articulo.getSubTotal());

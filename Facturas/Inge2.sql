@@ -23,22 +23,16 @@ CREATE TABLE `Factura` (
 );
 
 CREATE TABLE `Articulo` (
-  `ID` integer PRIMARY KEY AUTO_INCREMENT,
-  `Codigo` varchar(13),
+  `ID` integer,
+  `Codigo` varchar(13) PRIMARY KEY,
   `Cantidad` integer,
   `Impuesto` float4,
-  `Precio_Unitario` float4,
   `ID_Factura` integer
 );
 
-CREATE TABLE `Es` (
-  `ID_Articulo` integer,
-  `ID_Producto` integer
-);
-
 CREATE TABLE `Producto` (
-  `ID` integer PRIMARY KEY AUTO_INCREMENT,
-  `Codigo` varchar(255),
+  `ID` integer,
+  `Codigo` varchar(255) PRIMARY KEY,
   `Nombre` varchar(255),
   `Descripcion` varchar(255),
   `Cantidad` integer,
@@ -57,10 +51,6 @@ ALTER TABLE `Cliente` ADD FOREIGN KEY (`ID_Region`) REFERENCES `Region` (`ID`);
 ALTER TABLE `Factura` ADD FOREIGN KEY (`RFC_Cliente`) REFERENCES `Cliente` (`RFC`);
 
 ALTER TABLE `Articulo` ADD FOREIGN KEY (`ID_Factura`) REFERENCES `Factura` (`ID`);
-
-ALTER TABLE `ES` ADD FOREIGN KEY (`ID_Articulo`) REFERENCES `Articulo` (`ID`);
-
-ALTER TABLE `ES` ADD FOREIGN KEY (`ID_Producto`) REFERENCES `Producto` (`ID`);
 
 ALTER TABLE `Producto` ADD FOREIGN KEY (`ID_Categoria`) REFERENCES `Categoria` (`ID`);
 

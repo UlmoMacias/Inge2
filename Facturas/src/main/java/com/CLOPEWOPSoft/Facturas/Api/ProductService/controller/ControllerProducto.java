@@ -33,9 +33,9 @@ public class ControllerProducto {
 		return new ResponseEntity<>(serviceProducto.getProductos(),HttpStatus.OK);
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<Producto> getProducto(@PathVariable("id") Integer id){
-		return new ResponseEntity<>(serviceProducto.getProducto(id),HttpStatus.OK);
+	@GetMapping("/{codigo}")
+	public ResponseEntity<Producto> getProducto(@PathVariable("codigo") String codigo){
+		return new ResponseEntity<>(serviceProducto.getProducto(codigo),HttpStatus.OK);
 	}
 	
 	@PostMapping
@@ -47,18 +47,18 @@ public class ControllerProducto {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<HttpStatus> updateProduct(@Valid @RequestBody Producto producto, @PathVariable("id") Integer id, BindingResult bindingResult){
+	@PutMapping("/{codigo}")
+	public ResponseEntity<HttpStatus> updateProduct(@Valid @RequestBody Producto producto, @PathVariable("codigo") String codigo, BindingResult bindingResult){
 		if(bindingResult.hasErrors()) {
 			throw new ApiException(HttpStatus.BAD_REQUEST,bindingResult.getAllErrors().get(0).getDefaultMessage());
 		}
-		serviceProducto.updateProducto(producto, id);
+		serviceProducto.updateProducto(producto, codigo);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<HttpStatus> deleteProducto(@PathVariable("id") Integer id){
-		serviceProducto.deleteProducto(id);
+	@DeleteMapping("/{codigo}")
+	public ResponseEntity<HttpStatus> deleteProducto(@PathVariable("codigo") String codigo){
+		serviceProducto.deleteProducto(codigo);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
