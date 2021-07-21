@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FacturaComponent } from './_models/factura/factura.component';
+import { FacturaComponent } from './components/factura/factura.component';
 import { ClienteComponent } from './components/cliente/cliente.component';
 import { RegionComponent } from './components/region/region.component';
 import { FooterComponent } from './components/footer/footer.component';
