@@ -21,6 +21,16 @@ import com.CLOPEWOPSoft.Facturas.Api.CustomerService.entity.Cliente;
 import com.CLOPEWOPSoft.Facturas.Api.CustomerService.service.ServiceCliente;
 import com.CLOPEWOPSoft.Facturas.Api.ExceptionHandling.ApiException;
 
+
+/**
+
+* The class defines the Controller of Cleinte
+
+*
+
+* @version 1.0
+
+*/
 @RestController
 @RequestMapping("/cliente")
 public class ControllerCliente {
@@ -28,16 +38,43 @@ public class ControllerCliente {
 	@Autowired
 	ServiceCliente serviceCliente;
 	
+	
+	/**
+
+	* Method that lists Clientes
+
+	* @Returns a Response Entity with all the clients
+
+	*/
 	@GetMapping
 	public ResponseEntity<List<Cliente>> getClientes(){
 		return new ResponseEntity<>(serviceCliente.getClientes(),HttpStatus.OK);
 	}
 	
+	/**
+
+	* Method that provide the info of a Client
+	
+	* @Params Client id, integer id
+	* @Returns a Response Entity with the info of a Client id. 
+
+	*/
 	@GetMapping("/{id}")
 	public ResponseEntity<Cliente> getCliente(@PathVariable("id") Integer id){
 		return new ResponseEntity<>(serviceCliente.getCliente(id),HttpStatus.OK);
 	}
 	
+	
+	/**
+
+	* Method that create a Client
+	
+	* @Params Client cliente, BindingResult bindingResult
+	* @Returns a HttpStatus Created if succesfull.
+	* Otherwise,
+	* @Throws ApiException
+
+	*/
 	@PostMapping
 	public ResponseEntity<HttpStatus> createCliente(@Valid @RequestBody Cliente cliente, BindingResult bindingResult){
 		if(bindingResult.hasErrors()) {
@@ -47,6 +84,16 @@ public class ControllerCliente {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
+	/**
+
+	* Method that updates a Client
+	
+	* @Params Client cliente,id id,  BindingResult bindingResult
+	* @Returns a ResponseEntity with httpstatus created.
+	* Otherwise,
+	* @Throws ApiException
+
+	*/
 	@PutMapping("/{id}")
 	public ResponseEntity<HttpStatus> updateCliente(@Valid @RequestBody Cliente cliente, @PathVariable("id") Integer id, BindingResult bindingResult){
 		if(bindingResult.hasErrors()) {
@@ -56,6 +103,14 @@ public class ControllerCliente {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
+	/**
+
+	* Method that delete of a Client
+	
+	* @Params Client_id id, 
+	* @Returns a Response Entity with http status OK 
+
+	*/
 	@DeleteMapping("/{id}")
 	public ResponseEntity<HttpStatus> deleteCliente(@PathVariable("id") Integer id){
 		serviceCliente.deleteCliente(id);
