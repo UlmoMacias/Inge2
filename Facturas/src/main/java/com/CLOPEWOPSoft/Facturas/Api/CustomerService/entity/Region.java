@@ -15,7 +15,7 @@ import lombok.Data;
 
 * The class defines the structur of Regions, as well as its attributes
 
-* And output
+* 
 
 * @version 1.0
 
