@@ -17,7 +17,9 @@ import lombok.Data;
 @Data
 @Entity
 public class Articulo {
-
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonProperty("id")
 	@Column(name = "ID")
 	private Integer id;
@@ -28,7 +30,7 @@ public class Articulo {
 	@Min(value = 1, message = "La cantidad debe ser positiva")
 	private Integer cantidad;
 	
-	@Id
+	
 	@JsonProperty("codigo")
 	@Column(name = "Codigo")
 	@NotNull(message = "El codigo del articulo es requerido")

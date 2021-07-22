@@ -33,9 +33,9 @@ public class ControllerCliente {
 		return new ResponseEntity<>(serviceCliente.getClientes(),HttpStatus.OK);
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<Cliente> getCliente(@PathVariable("id") Integer id){
-		return new ResponseEntity<>(serviceCliente.getCliente(id),HttpStatus.OK);
+	@GetMapping("/{rfc}")
+	public ResponseEntity<Cliente> getCliente(@PathVariable("rfc") String rfc){
+		return new ResponseEntity<>(serviceCliente.getCliente(rfc),HttpStatus.OK);
 	}
 	
 	@PostMapping

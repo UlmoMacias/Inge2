@@ -13,6 +13,9 @@ import com.CLOPEWOPSoft.Facturas.Api.CustomerService.entity.Cliente;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente,Integer>{
 
+	@Query(value = "SELECT * FROM Cliente WHERE RFC = :rfc", nativeQuery = true)
+	Cliente getCliente(@Param("rfc") String rfc);
+	
 	@Modifying
 	@Transactional
 	@Query(value = "CALL st_create_cliente(:nombres , "
@@ -25,8 +28,6 @@ public interface ClienteRepository extends JpaRepository<Cliente,Integer>{
 			@Param("rfc") String rfc,
 			@Param("correo") String correo,
 			@Param("idRegion") Integer idRegion);
-	
-	
 	
 	@Modifying
 	@Transactional

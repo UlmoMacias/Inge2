@@ -8,11 +8,12 @@ public interface ServiceArticulo {
 
 	public List<Articulo> getArticulos();
 	
-	public Articulo getArticulo(String codigo);
+	public Articulo getArticulo(Integer id);
 	
 	public void createArticulo(Articulo articulo);
 	
-	public void updateArticulo(Articulo articulo, String codigo);
+	public void updateArticulo(Articulo articulo, Integer id);
 	
-	public void deleteArticulo(String codigo);
+	public void deleteArticulo(Integer id);
+
 }

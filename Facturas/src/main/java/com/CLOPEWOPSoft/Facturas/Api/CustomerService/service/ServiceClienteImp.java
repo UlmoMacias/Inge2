@@ -28,10 +28,11 @@ public class ServiceClienteImp implements ServiceCliente {
 	}
 
 	@Override
-	public Cliente getCliente(Integer id) {
+	public Cliente getCliente(String rfc) {
 		try {
-			java.util.Optional<Cliente> c = clienteRepository.findById(id);
-			return c.get();
+			//java.util.Optional<Cliente> c = clienteRepository.findById(id);
+			//return c.get();
+			return clienteRepository.getCliente(rfc);
 		}catch(Exception e) {
 			throw new ApiException(HttpStatus.NOT_FOUND,e.getLocalizedMessage());
 		}

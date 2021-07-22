@@ -8,10 +8,6 @@ BEGIN
 DECLARE
 	v_size INT DEFAULT 0;
 	DECLARE v_count INT DEFAULT 1;
-IF EXISTS (SELECT Codigo FROM Articulo WHERE Codigo = p_codigo)
-	THEN
-		SIGNAL SQLSTATE '50000' SET MESSAGE_TEXT = 'El Articulo ya está registrado';
-	END IF;
 SET v_size = (SELECT count(ID) FROM Articulo);
 WHILE v_count <= v_size
 	DO

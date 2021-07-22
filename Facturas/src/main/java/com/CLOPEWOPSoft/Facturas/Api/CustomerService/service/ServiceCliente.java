@@ -8,7 +8,7 @@ public interface ServiceCliente {
 
 	public List<Cliente> getClientes();
 	
-	public Cliente getCliente(Integer id);
+	public Cliente getCliente(String rfc);
 	
 	public void createCliente(Cliente cliente);
 	

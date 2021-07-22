@@ -17,17 +17,17 @@ CREATE TABLE `Cliente` (
 
 CREATE TABLE `Factura` (
   `ID` integer PRIMARY KEY AUTO_INCREMENT,
-  `FechaCreacion` date,
+  `fecha_creacion` date,
   `Status` tinyint,
   `RFC_Cliente` varchar(255)
 );
 
 CREATE TABLE `Articulo` (
-  `ID` integer,
-  `Codigo` varchar(13) PRIMARY KEY,
+  `ID` integer PRIMARY KEY AUTO_INCREMENT,
+  `Codigo` varchar(13),
   `Cantidad` integer,
   `Impuesto` float4,
-  `ID_Factura` integer
+  `id_factura` integer
 );
 
 CREATE TABLE `Producto` (
