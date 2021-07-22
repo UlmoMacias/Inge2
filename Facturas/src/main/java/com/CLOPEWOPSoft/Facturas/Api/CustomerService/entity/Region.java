@@ -11,6 +11,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 
+/**
+
+* The class defines the structur of Regions, as well as its attributes
+
+* 
+
+* @version 1.0
+
+*/
+
 @Data
 @Entity
 public class Region {
