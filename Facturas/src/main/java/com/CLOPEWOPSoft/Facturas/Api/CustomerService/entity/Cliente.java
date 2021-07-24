@@ -14,16 +14,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 
-
-/**
-
-* The class defines the structur of Cleinte, as well as its attributes
-
-* 
-
-* @version 1.0
-
-*/
 @Data
 @Entity
 public class Cliente {
