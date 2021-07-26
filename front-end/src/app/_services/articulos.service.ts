@@ -11,18 +11,18 @@ export class ArticulosService {
 
   constructor(private http: HttpClient) { }
   getArticulos(){
-    return this.http.get(this.API_URI+"/articulos")
+    return this.http.get(this.API_URI+"/articulo")
   }
 
   getArticulo(id: number){
-    return this.http.get(this.API_URI+"/acticulos/"+id)
+    return this.http.get(this.API_URI+"/acticulo/"+id)
   }
 
   createArticulo(articulo: Articulo){
     return this.http.post(this.API_URI+"/articulo", articulo)
   }
 
-  editArticulo(articulo : Articulo){
+  updateArticulo(articulo : Articulo){
     return this.http.put(this.API_URI+"/articulo/"+articulo.id, articulo)
   }
 

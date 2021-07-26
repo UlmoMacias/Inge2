@@ -1,21 +1,33 @@
 export class Articulo {
 
     id : number
-    idfactura: number
     cantidad: number
-    porcentaje : number 
+    codigo : String
+    impuesto : number 
+    precio_unitario : number
     subtotal : number
-    unitario: number 
     total : number
+    id_factura: number    
 
-    constructor(id, idfactura, cantidad, porcentaje, subtotal, unitario, total){
-        this.id = id
-        this.idfactura = idfactura
-        this.cantidad = cantidad
-        this.porcentaje = porcentaje
-        this.subtotal = subtotal
-        this.unitario = unitario
-        this.total  = total
-    }
+  constructor(
+    id: number, 
+    cantidad: number, 
+    codigo: String, 
+    impuesto: number , 
+    precio_unitario: number, 
+    subtotal: number, 
+    total: number, 
+    id_factura: number    
+) {
+    this.id = id
+    this.cantidad = cantidad
+    this.codigo = codigo
+    this.impuesto = impuesto
+    this.precio_unitario = precio_unitario
+    this.subtotal = subtotal
+    this.total = total
+    this.id_factura = id_factura
+  }
+
 
 }

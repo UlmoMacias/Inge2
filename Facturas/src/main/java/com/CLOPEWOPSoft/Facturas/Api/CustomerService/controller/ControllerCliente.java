@@ -38,6 +38,13 @@ public class ControllerCliente {
 		return new ResponseEntity<>(serviceCliente.getCliente(rfc),HttpStatus.OK);
 	}
 	
+	/**
+	* Method that create a Client
+	* @Params Client cliente, BindingResult bindingResult
+	* @Returns a HttpStatus Created if succesfull.
+	* Otherwise,
+	* @Throws ApiException
+	*/
 	@PostMapping
 	public ResponseEntity<HttpStatus> createCliente(@Valid @RequestBody Cliente cliente, BindingResult bindingResult){
 		if(bindingResult.hasErrors()) {
