@@ -51,24 +51,12 @@ public class ControllerCliente {
 		return new ResponseEntity<>(serviceCliente.getClientes(),HttpStatus.OK);
 	}
 	
-<<<<<<< HEAD
+
 	@GetMapping("/{rfc}")
 	public ResponseEntity<Cliente> getCliente(@PathVariable("rfc") String rfc){
 		return new ResponseEntity<>(serviceCliente.getCliente(rfc),HttpStatus.OK);
-=======
-	/**
-
-	* Method that provide the info of a Client
-	
-	* @Params Client id, integer id
-	* @Returns a Response Entity with the info of a Client id. 
-
-	*/
-	@GetMapping("/{id}")
-	public ResponseEntity<Cliente> getCliente(@PathVariable("id") Integer id){
-		return new ResponseEntity<>(serviceCliente.getCliente(id),HttpStatus.OK);
->>>>>>> 809aac3da64a6207d575375cdb68208f4cc699d0
 	}
+	
 	
 	
 	/**

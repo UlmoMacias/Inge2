@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import {Factura} from '../_models/factura';
 
-
 @Injectable({
   providedIn: 'root'
 })
