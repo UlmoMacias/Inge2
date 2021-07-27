@@ -38,5 +38,13 @@ export class ClienteComponent implements OnInit {
     */
   }
 
+  verRegion( id_region: number){
+    
+  }
+
+  agregarCliente(){
+    $("#nuevo").modal("show")
+  }
+
 
 }

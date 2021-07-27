@@ -2,7 +2,61 @@
     <app-navbar></app-navbar>
 </div>
 
-<p>cliente works!</p>
+<div class="container-fluid">
+    <div class="card ">
+        <h3 class="text-center">Clientes <br></h3>
+        <div class="text-center">
+            <button type="button" class="btn btn-success btn-sm" (click)="agregarCliente()">Nuevo Cliente</button>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th> Id </th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>RFC</th>
+                        <th>Correo</th>
+                        <th>Region</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cliente of clientes ">
+                        <th>{{cliente.id}} </th>
+                        <th>{{cliente.nombres}}</th>
+                        <th>{{cliente.apellidos}} </th>
+                        <th>{{cliente.rfc}}</th>
+                        <th>{{cliente.correo}} </th>
+                        <th><button class="btn btn-info btn-sm" type="button" (click)="verRegion(cliente.id_region)">Region</button> </th>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="nuevo">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
 
 <div>
