@@ -10,7 +10,6 @@ export class Factura{
     total: number
     articulos : Articulo[]
 
-
   constructor(
     id: number, 
     fecha_creacion: Date, 
@@ -31,7 +30,5 @@ export class Factura{
     this.articulos = articulos
   }
 
-
-    
 
 }

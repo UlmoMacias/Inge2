@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { FormBuilder } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FacturaComponent } from './components/factura/factura.component';
@@ -11,6 +15,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProductosComponent } from './components/productos/productos.component';
 import { ArticulosComponent } from './components/articulos/articulos.component';
 import { CategoriasComponent } from './components/categorias/categorias.component';
+import { IncorrectoComponent } from './components/incorrecto/incorrecto.component';
 
 @NgModule({
   declarations: [
@@ -22,13 +27,29 @@ import { CategoriasComponent } from './components/categorias/categorias.componen
     NavbarComponent,
     ProductosComponent,
     ArticulosComponent,
-    CategoriasComponent
+    CategoriasComponent,
+    IncorrectoComponent
   ],
+  exports: [
+    FacturaComponent,
+    ClienteComponent,
+    RegionComponent,
+    ProductosComponent,
+    ArticulosComponent,
+    CategoriasComponent,
+    IncorrectoComponent, 
+    FooterComponent,
+    NavbarComponent
+
+  ],
+
   imports: [
+    HttpClientModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [ FormBuilder],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

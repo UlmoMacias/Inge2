@@ -7,7 +7,6 @@ export class Cliente{
     correo: String
     id_region : number
 
-
   constructor(
     id: number, 
     nombres: String, 
@@ -24,6 +23,8 @@ export class Cliente{
     this.id_region = id_region
   }
 
+
+  
 
     
 
