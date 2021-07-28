@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Region } from 'src/app/_models/region';
 import { ClienteService } from 'src/app/_services/cliente.service';
 import {Cliente} from '../../_models/cliente'
 
-declare var $: any
+declare var $:any;
 
 @Component({
   selector: 'app-cliente',
@@ -13,6 +14,8 @@ declare var $: any
 export class ClienteComponent implements OnInit {
 
   clientes : Cliente [] | any 
+  summited = false
+
 
   constructor(private clienteService: ClienteService , private formBuilder: FormBuilder) { }
 
@@ -20,11 +23,12 @@ export class ClienteComponent implements OnInit {
 
   this.getClientes()
 
+
   }
 
   getClientes(){
 
-    this.clientes = [new Cliente(1,"nombre", "apellido", "rfc", "correo", 23)]
+    this.clientes = [new Cliente(1,"nombre", "apellido", "rfc", "correo", 1)]
     console.log("get Clientes")
     
     /*this.clienteService.getClientes().subscribe(
@@ -38,13 +42,19 @@ export class ClienteComponent implements OnInit {
     */
   }
 
-  verRegion( id_region: number){
+  getRegiones(){
     
   }
 
   agregarCliente(){
+    $("#nuevo").modal({
+      backdrop: 'static'
+    });
     $("#nuevo").modal("show")
   }
 
+  verFacturas(region){
+    console.log(region)
+  }
 
 }

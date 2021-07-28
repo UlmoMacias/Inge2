@@ -6,6 +6,7 @@ import {Region} from '../../_models/region'
 import {Cliente} from '../../_models/cliente'
 
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import {ActivatedRoute } from '@angular/router'
 
 
 @Component({
@@ -14,10 +15,17 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
   styleUrls: ['./factura.component.css']
 })
 export class FacturaComponent implements OnInit {
-
-  constructor() { }
+  orderby: string;
+  constructor(private route: ActivatedRoute ) { }
 
   ngOnInit(): void {
+    this.route.queryParams
+      .subscribe(params => {
+        console.log(params); // { orderby: "price" }
+        this.orderby = params.id;
+        
+      }
+    );
 
     
 

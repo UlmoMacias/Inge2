@@ -7,9 +7,8 @@ import { IncorrectoComponent } from './components/incorrecto/incorrecto.componen
 
 const routes: Routes = [
   
-  { path: '' , component: FooterComponent},
+  { path: '' , component: ClienteComponent},
   { path: 'clientes', component: ClienteComponent},
-  { path: 'cli', component: ClienteComponent},
   { path: '**', component: IncorrectoComponent}
 
 ];

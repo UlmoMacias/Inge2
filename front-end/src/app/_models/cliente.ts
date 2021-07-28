@@ -1,3 +1,4 @@
+import {Region} from '../_models/region'
 export class Cliente{
 
     id : number
@@ -5,7 +6,7 @@ export class Cliente{
     apellidos :String
     rfc : String
     correo: String
-    id_region : number
+    id_region: number
 
   constructor(
     id: number, 
@@ -13,7 +14,7 @@ export class Cliente{
     apellidos: String, 
     rfc: String, 
     correo: String, 
-    id_region: number
+    id_region:  number
 ) {
     this.id = id
     this.nombres = nombres
