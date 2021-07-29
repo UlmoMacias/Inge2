@@ -14,18 +14,19 @@ DECLARE
 	DECLARE v_count INT DEFAULT 1;
 IF EXISTS (SELECT Codigo FROM Producto WHERE Codigo = p_codigo)
 	THEN
-		SIGNAL SQLSTATE '50000' SET MESSAGE_TEXT = 'El producto ya está registrado';
+		UPDATE Producto SET Status = 1 WHERE Codigo = p_codigo;
+ELSE
+		SET v_size = (SELECT count(ID) FROM Producto);
+		WHILE v_count <= v_size
+			DO
+				IF EXISTS (SELECT ID FROM Producto WHERE ID = v_count)
+					THEN
+						SET v_count = v_count + 1;
+					ELSE
+						SET v_size = 0;
+					END IF;
+			END WHILE;
+		INSERT INTO Producto Values(v_count,p_codigo,p_nombre,p_descripcion,p_cantidad,p_precion,p_fecha_creacion,p_id_categoria,1);
 	END IF;
-SET v_size = (SELECT count(ID) FROM Producto);
-WHILE v_count <= v_size
-	DO
-		IF EXISTS (SELECT ID FROM Producto WHERE ID = v_count)
-			THEN
-				SET v_count = v_count + 1;
-			ELSE
-				SET v_size = 0;
-			END IF;
-	END WHILE;
-INSERT INTO Producto Values(v_count,p_codigo,p_nombre,p_descripcion,p_cantidad,p_precion,p_fecha_creacion,p_id_categoria);
 END;
 //

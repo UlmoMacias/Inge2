@@ -1,8 +1,10 @@
 USE `inge2`;
+SET SQL_SAFE_UPDATES=0;
 
 SELECT * FROM Region;
 
 SELECT * FROM Cliente;
+DELETE FROM CLIENTE WHERE ID = 1;
 
 SELECT * FROM Categoria;
 

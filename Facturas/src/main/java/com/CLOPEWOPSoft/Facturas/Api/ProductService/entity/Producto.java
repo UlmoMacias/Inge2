@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
@@ -63,4 +64,7 @@ public class Producto {
 	@ManyToOne
 	@JoinColumn(name = "ID_Categoria")
 	private Categoria categoria;
+	
+	@JsonIgnore
+	private Integer status;
 }

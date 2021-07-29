@@ -25,7 +25,7 @@ public class ServiceRegionImp implements ServiceRegion {
 	
 	@Override
 	public List<Region> getRegions() {
-		return regionRepository.findAll();
+		return regionRepository.getRegions();
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class ServiceRegionImp implements ServiceRegion {
 
 	@Override
 	public void createRegion(Region region) {
-		regionRepository.save(region);
+		regionRepository.createRegion(region.getRegion());
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class ServiceRegionImp implements ServiceRegion {
 	@Override
 	public void deleteRegion(Integer id) {
 		try {
-			regionRepository.deleteById(id);
+			regionRepository.deleteRegion(id);
 		}catch(Exception e) {
 			throw new ApiException(HttpStatus.NOT_FOUND,e.getLocalizedMessage());
 		}

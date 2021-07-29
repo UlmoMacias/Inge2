@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
@@ -24,4 +25,7 @@ public class Categoria {
 	@JsonProperty("categoria")
 	@NotNull(message = "Se necesita el nombre de la categoria")
 	private String categoria;
+	
+	@JsonIgnore
+	private Integer status;
 }

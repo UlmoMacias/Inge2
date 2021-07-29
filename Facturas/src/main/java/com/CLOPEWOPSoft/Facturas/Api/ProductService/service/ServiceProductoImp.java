@@ -23,7 +23,7 @@ public class ServiceProductoImp implements ServiceProducto {
 	
 	@Override
 	public List<Producto> getProductos() {
-		return productoRepository.findAll();
+		return productoRepository.getProductos();
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class ServiceProductoImp implements ServiceProducto {
 	@Override
 	public void deleteProducto(String codigo) {
 		try {
-			productoRepository.deleteById(codigo);
+			productoRepository.deleteProducto(codigo);
 		}catch(Exception e) {
 			throw new ApiException(HttpStatus.NOT_FOUND,e.getLocalizedMessage());
 		}

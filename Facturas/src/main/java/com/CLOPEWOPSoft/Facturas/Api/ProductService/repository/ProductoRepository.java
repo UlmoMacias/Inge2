@@ -1,6 +1,7 @@
 package com.CLOPEWOPSoft.Facturas.Api.ProductService.repository;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -12,6 +13,9 @@ import org.springframework.data.repository.query.Param;
 import com.CLOPEWOPSoft.Facturas.Api.ProductService.entity.Producto;
 
 public interface ProductoRepository extends JpaRepository<Producto,String>{
+	
+	@Query(value = "SELECT * FROM Producto WHERE Status = 1", nativeQuery = true)
+	List<Producto> getProductos();
 	
 	@Modifying
 	@Transactional
@@ -47,4 +51,9 @@ public interface ProductoRepository extends JpaRepository<Producto,String>{
 						@Param("fechaCreacion") LocalDate fechaCreacion,
 						@Param("idCategoria") Integer idCategoria,
 						@Param("codigo") String codigo);
+	
+	@Modifying
+	@Transactional
+	@Query(value = "UPDATE Producto SET Status = 0 WHERE Codigo = :codigo", nativeQuery = true)
+	void deleteProducto(@Param("codigo") String codigo);
 }
