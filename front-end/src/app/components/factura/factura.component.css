@@ -1,0 +1,12 @@
+.container-fluid {
+    background-color: azure;
+    min-height: calc(100vh - 40px - 20px);
+}
+
+th {
+    text-align: center;
+}
+
+body {
+    background-color: cyan;
+}

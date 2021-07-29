@@ -16,6 +16,7 @@ import { ProductosComponent } from './components/productos/productos.component';
 import { ArticulosComponent } from './components/articulos/articulos.component';
 import { CategoriasComponent } from './components/categorias/categorias.component';
 import { IncorrectoComponent } from './components/incorrecto/incorrecto.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { IncorrectoComponent } from './components/incorrecto/incorrecto.componen
     ProductosComponent,
     ArticulosComponent,
     CategoriasComponent,
-    IncorrectoComponent
+    IncorrectoComponent,
+    AboutComponent
   ],
   exports: [
     FacturaComponent,
