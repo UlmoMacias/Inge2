@@ -17,6 +17,7 @@ import { ArticulosComponent } from './components/articulos/articulos.component';
 import { CategoriasComponent } from './components/categorias/categorias.component';
 import { IncorrectoComponent } from './components/incorrecto/incorrecto.component';
 import { AboutComponent } from './components/about/about.component';
+import { EditarArticulosComponent } from './components/editar-articulos/editar-articulos.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AboutComponent } from './components/about/about.component';
     ArticulosComponent,
     CategoriasComponent,
     IncorrectoComponent,
-    AboutComponent
+    AboutComponent,
+    EditarArticulosComponent
   ],
   exports: [
     FacturaComponent,

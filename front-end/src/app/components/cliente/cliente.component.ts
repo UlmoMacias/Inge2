@@ -48,7 +48,6 @@ export class ClienteComponent implements OnInit {
 
   getRegiones(){
     this.regiones = [new Region(1, "oaxaca"),new Region(2, "oaxaca2")]
-    
   }
 
   agregarCliente(){
