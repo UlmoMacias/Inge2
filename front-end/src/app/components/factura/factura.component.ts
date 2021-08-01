@@ -19,6 +19,8 @@ declare var $: any
 export class FacturaComponent implements OnInit {
   rfc: string;
   facturas : Factura [] | any
+  articulos : Articulo [] | any
+  productos : Producto [] | any
 
   constructor(private route: ActivatedRoute, private facturaService: FacturaService) { }
 
@@ -30,11 +32,34 @@ export class FacturaComponent implements OnInit {
   }
   getFacturas(){
     
-    this.facturas = []//[new Factura(1, new Date("11 08 2019 ") , this.rfc, 12, 234, 123.45, 5656, [new Articulo(1,123,"asdasd", 34, 56, 1,12, 123 )]), new Factura(2, new Date("11 08 2019 ") , this.rfc, 12, 234, 123.45, 5656, [new Articulo(1,123,"asdasd", 34, 56, 1,12, 123 )]),new Factura(1, new Date("11 08 2019 ") , this.rfc, 12, 234, 123.45, 5656, [new Articulo(1,123,"asdasd", 34, 56, 1,12, 123 )]), new Factura(2, new Date("11 08 2019 ") , this.rfc, 12, 234, 123.45, 5656, [new Articulo(1,123,"asdasd", 34, 56, 1,12, 123 )]),new Factura(1, new Date("11 08 2019 ") , this.rfc, 12, 234, 123.45, 5656, [new Articulo(1,123,"asdasd", 34, 56, 1,12, 123 )]), new Factura(2, new Date("11 08 2019 ") , this.rfc, 12, 234, 123.45, 5656, [new Articulo(1,123,"asdasd", 34, 56, 1,12, 123 )])]
-//    this.facturaService.getFacturas(this.rfc).subscribe(
-//
+  this.facturas = [new Factura(1, new Date("11 08 2019 ") , this.rfc, 12, 234, 123.45, 5656, [new Articulo(1,123,"asdasd", 34, 56, 1,12, 123 )]), new Factura(2, new Date("11 08 2019 ") , this.rfc, 12, 234, 123.45, 5656, [new Articulo(1,123,"asdasd", 34, 56, 1,12, 123 )]),new Factura(1, new Date("11 08 2019 ") , this.rfc, 12, 234, 123.45, 5656, [new Articulo(1,123,"asdasd", 34, 56, 1,12, 123 )]), new Factura(2, new Date("11 08 2019 ") , this.rfc, 12, 234, 123.45, 5656, [new Articulo(1,123,"asdasd", 34, 56, 1,12, 123 )]),new Factura(1, new Date("11 08 2019 ") , this.rfc, 12, 234, 123.45, 5656, [new Articulo(1,123,"asdasd", 34, 56, 1,12, 123 )]), new Factura(2, new Date("11 08 2019 ") , this.rfc, 12, 234, 123.45, 5656, [new Articulo(1,123,"asdasd", 34, 56, 1,12, 123 )])]
+//    this.facturaService.getFacturas().subscribe(
+//      res => {
+//        this.facturas = res
+//      },
+//      err => {
+//        console.error(err)
+//      }
 //    )
 
+  }
+
+  detalleArticulos(id: number){
+    for (let a of this.facturas){
+      if (id == a.id ){
+          this.articulos = a.articulos
+          console.log(JSON.stringify( a.articulos))          
+        }
+      }
+
+
+    $("#nuevo").modal({
+      backdrop: 'static'
+    });
+    $("#nuevo").modal("show")
+
+
+ 
 
   }
 

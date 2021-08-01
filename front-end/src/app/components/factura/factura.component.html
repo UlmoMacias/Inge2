@@ -62,16 +62,15 @@
                     <button class="btn btn-warning btn-sm"><i class="fas fa-edit"></i>&nbsp; Editar</button>
                 </div>
                 <div class="card-body text-center">
-
-                    Creacion
-                    <p>{{factura.fecha_creacion | date:'dd-MM-yyyy'}}</p>
                     Cliente
                     <p> {{factura.rfc_cliente }}</p>
+                    Creacion
+                    <p>{{factura.fecha_creacion | date:'dd-MM-yyyy'}}</p>
                     Subtotal
                     <p>{{factura.subtotal}}</p>
                     Impuestos
                     <p>{{factura.taxes}}</p>
-                    <p><button class="btn btn-info">Articulos <br><i class="fas fa-barcode"></i></button></p>
+                    <p><button class="btn btn-info" (click)="detalleArticulos(factura.id)">Articulos <br><i class="fas fa-barcode"></i></button></p>
                     Total
                     <p>{{factura.total}}</p>
                 </div>
@@ -88,6 +87,38 @@
 
     </div>
     <br>
+</div>
+
+<div class="modal fade" id="nuevo">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class=" text-center modal-header ">
+                <h5 class="modal-title">Detalles de Articulos</h5>
+            </div>
+            <div class="modal-body">
+                <div *ngFor="let articulo of articulos">
+                    <div class="card  mb-3">
+                        <div class="card-header d-flex justify-content-between align-items-center ">
+                            Código : {{articulo.codigo}}
+                            <button class="btn btn-info btn-sm"><i class="fas fa-info-circle"></i>&nbsp; Detalles</button>
+                        </div>
+                        <div class="card-body text-center">
+                            Cantidad: {{articulo.cantidad}}
+                            <br> Impuesto: {{articulo.impuesto}}
+                            <br> Precio Unitario: {{articulo.precio_unitario}}
+                            <br> Sub Total: {{articulo.subtotal}}
+                            <br> Total: {{articulo.total}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 
