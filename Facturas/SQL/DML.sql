@@ -2,6 +2,7 @@ USE `inge2`;
 
 CALL st_create_region("Oaxaca");
 INSERT INTO Region VALUES(2,"Veracruz",1);
+ CALL st_delete_region(3);
 
 
 INSERT INTO Cliente VALUES(1,"Jonatan","Castro Mejia","JCM","@Joni",1,1);
@@ -9,6 +10,7 @@ CALL st_create_cliente("LUIS", "ANGEL", "ACM", "@Howke",1);
 
 CALL st_create_categoria("Farmacia");
 INSERT INTO Categoria VALUES(2,"Tiendita",1);
+-- CALL st_delete_categoria(1);
 
 
 CALL st_create_producto("0000000000000","Producto de prueba","Producto Prueba",10,10,CURRENT_DATE(),1);

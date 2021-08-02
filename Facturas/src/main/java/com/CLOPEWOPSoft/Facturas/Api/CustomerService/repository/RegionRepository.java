@@ -18,6 +18,9 @@ public interface RegionRepository extends JpaRepository<Region,Integer>{
 	@Query(value = "SELECT * FROM Region WHERE Status = 1", nativeQuery = true)
 	List<Region> getRegions();
 	
+	@Query(value = "SELECT * FROM Region WHERE Status = 1 AND ID = :id", nativeQuery = true)
+	Region getRegion(@Param("id") Integer id);
+	
 	@Modifying
 	@Transactional
 	@Query(value = "CALL st_create_region(:region)", nativeQuery = true)
@@ -30,7 +33,7 @@ public interface RegionRepository extends JpaRepository<Region,Integer>{
 	
 	@Modifying
 	@Transactional
-	@Query(value = "UPDATE Region SET Status = 0 WHERE ID = :id", nativeQuery = true)
+	@Query(value = "CALL st_delete_region(:id)", nativeQuery = true)
 	void deleteRegion(@Param("id")Integer id);
 	
 }

@@ -2,6 +2,9 @@ USE `inge2`;
 SET SQL_SAFE_UPDATES=0;
 
 SELECT * FROM Region;
+(SELECT count(ID_Region) FROM Cliente WHERE ID_Region = 3);
+SELECT count(ID_Region) FROM Cliente WHERE ID_Region;
+
 
 SELECT * FROM Cliente;
 DELETE FROM CLIENTE WHERE ID = 1;

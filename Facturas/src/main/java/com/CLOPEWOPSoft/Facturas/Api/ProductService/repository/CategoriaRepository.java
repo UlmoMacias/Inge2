@@ -30,6 +30,6 @@ public interface CategoriaRepository extends JpaRepository<Categoria,Integer>{
 
 	@Modifying
 	@Transactional
-	@Query(value = "UPDATE Categoria SET Status = 0 WHERE ID = :id", nativeQuery = true)
+	@Query(value = "CALL st_delete_categoria(:id)", nativeQuery = true)
 	void deleteCategoria(@Param("id")Integer id);
 }

@@ -31,7 +31,7 @@ public class ServiceRegionImp implements ServiceRegion {
 	@Override
 	public Region getRegion(Integer id) {
 		try {
-			Region r = ((Optional<Region>) regionRepository.findById(id)).get();
+			Region r = regionRepository.getRegion(id);
 			return r;
 		}catch(Exception e) {
 			throw new ApiException(HttpStatus.NOT_FOUND,e.getLocalizedMessage());

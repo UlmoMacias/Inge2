@@ -32,10 +32,15 @@ public class ControllerFactura {
 		return new ResponseEntity<>(serviceFactura.getFacturas(),HttpStatus.OK);
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/{rfc}")
+	public ResponseEntity<List<Factura>> getFacturas(@PathVariable("rfc") String rfc){
+		return new ResponseEntity<>(serviceFactura.getFacturas(rfc),HttpStatus.OK);
+	}
+	
+	/*@GetMapping("/{id}")
 	public ResponseEntity<Factura> getFactura(@PathVariable("id") Integer id){
 		return new ResponseEntity<>(serviceFactura.getFactura(id), HttpStatus.OK);
-	}
+	}*/
 	
 	@PostMapping
 	public ResponseEntity<HttpStatus> createFactura(@Valid @RequestBody Factura factura, BindingResult bindingResult){
