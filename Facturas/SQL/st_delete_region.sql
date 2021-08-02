@@ -1,15 +1,22 @@
+ DROP PROCEDURE IF EXISTS st_delete_region;
 DELIMITER //
 
-CREATE PROCEDURE st_delete_region(id_region Integer)
+CREATE PROCEDURE st_delete_region(IN id_region Integer)
 BEGIN
+DECLARE num_reg INT DEFAULT 0;
 
-DECLARE num_regions INT DEFAULT 0;
-DECLARE Num INT DEFAULT 0;
+CREATE TABLE Temp AS SELECT Cliente.ID, Region.ID AS R_ID, Cliente.Status FROM Cliente 
+INNER JOIN Region WHERE Cliente.ID_Region = Region.ID AND Cliente.Status = 1 AND Cliente.ID_Region = id_region;
 
-SET num_regions = (SELECT count(ID_Region = Num) FROM Cliente);
+SET num_reg = (SELECT COUNT(*) FROM Temp);
+
+-- SELECT * From Temp;
+
+DROP TABLE Temp;
 
 
-IF (SELECT count(ID_Region) FROM Cliente WHERE ID_Region = Num) < 1
+
+IF num_reg < 1
 	THEN
 		UPDATE Region SET Status = 0 WHERE ID = id_region;
 ELSE
