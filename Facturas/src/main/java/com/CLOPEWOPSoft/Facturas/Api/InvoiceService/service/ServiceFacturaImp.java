@@ -45,6 +45,19 @@ public class ServiceFacturaImp implements ServiceFactura {
 			throw new ApiException(HttpStatus.NOT_FOUND, e.getLocalizedMessage());
 		}
 	}
+	
+	@Override
+	public List<Factura> getFacturas(String rfc){
+		try {
+			List<Factura> facturas = facturaRepository.getFacturas(rfc);
+			for(Factura f : facturas) {
+				setCostosFactura(f);
+			}
+			return facturas;
+		}catch(Exception e) {
+			throw new ApiException(HttpStatus.NOT_FOUND, e.getLocalizedMessage());
+		}
+	}
 
 	@Override
 	public Factura getFactura(Integer id) {

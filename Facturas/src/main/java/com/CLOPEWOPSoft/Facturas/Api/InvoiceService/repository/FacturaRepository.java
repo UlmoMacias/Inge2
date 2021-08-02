@@ -18,6 +18,9 @@ public interface FacturaRepository extends JpaRepository<Factura,Integer>{
 	@Query(value = "SELECT * FROM Factura WHERE Status = 1", nativeQuery = true)
 	List<Factura> getFacturas();
 	
+	@Query(value = "SELECT * FROM Factura WHERE Status = 1 AND RFC_Cliente = :rfc", nativeQuery = true)
+	List<Factura> getFacturas(@Param("rfc") String rfc);
+	
 	@Modifying
 	@Transactional
 	@Query(value = "UPDATE Factura SET Status = 0 WHERE ID = :id", nativeQuery = true)

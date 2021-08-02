@@ -41,7 +41,7 @@ public class ControllerCliente {
 	/**
 	* Method that create a Client
 	* @Params Client cliente, BindingResult bindingResult
-	* @Returns a HttpStatus Created if succesfull.
+	* @Return a HttpStatus Created if succesfull.
 	* Otherwise,
 	* @Throws ApiException
 	*/

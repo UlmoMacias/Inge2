@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
@@ -25,4 +26,7 @@ public class Region {
 	@NotNull(message = "El nombre de la region es requerida")
 	@Column(name = "Region")
 	private String region;
+	
+	@JsonIgnore
+	private Integer status;
 }

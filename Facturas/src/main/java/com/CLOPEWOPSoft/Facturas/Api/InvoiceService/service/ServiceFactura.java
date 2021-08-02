@@ -8,6 +8,8 @@ public interface ServiceFactura {
 
 	public List<Factura> getFacturas();
 	
+	public List<Factura> getFacturas(String rfc);
+	
 	public Factura getFactura(Integer id);
 	
 	public void createFactura(Factura factura);

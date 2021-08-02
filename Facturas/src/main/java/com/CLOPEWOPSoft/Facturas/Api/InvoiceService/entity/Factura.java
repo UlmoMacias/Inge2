@@ -48,7 +48,7 @@ public class Factura {
 	@Transient
 	private Double subtotal;
 	
-	@JsonProperty("taxes")
+	@JsonProperty("impuestos")
 	@Transient
 	private Double impuestos;
 	

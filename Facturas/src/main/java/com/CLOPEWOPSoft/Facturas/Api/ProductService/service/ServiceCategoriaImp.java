@@ -23,7 +23,7 @@ public class ServiceCategoriaImp implements ServiceCategoria {
 	
 	@Override
 	public List<Categoria> getCategorias() {
-		return categoriaRepository.findAll();
+		return categoriaRepository.getCategorias();
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class ServiceCategoriaImp implements ServiceCategoria {
 
 	@Override
 	public void createCategoria(Categoria categoria) {
-		categoriaRepository.save(categoria);
+		categoriaRepository.createCategoria(categoria.getCategoria());
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class ServiceCategoriaImp implements ServiceCategoria {
 	@Override
 	public void deleteCategoria(Integer id) {
 		try {
-			categoriaRepository.deleteById(id);
+			categoriaRepository.deleteCategoria(id);
 		}catch(Exception e) {
 			throw new ApiException(HttpStatus.NOT_FOUND,e.getLocalizedMessage());
 		}

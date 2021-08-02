@@ -24,6 +24,6 @@ WHILE v_count <= v_size
 				SET v_size = 0;
 			END IF;
 	END WHILE;
-INSERT INTO Cliente VALUES(v_count,p_nombre,p_apellidos, p_rfc, p_correo,p_id_region);
+INSERT INTO Cliente VALUES(v_count,p_nombre,p_apellidos, p_rfc, p_correo,p_id_region,1);
 END;
 //

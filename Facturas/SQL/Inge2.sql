@@ -3,7 +3,8 @@ USE `inge2`;
 
 CREATE TABLE `Region` (
   `ID` integer PRIMARY KEY AUTO_INCREMENT,
-  `Region` varchar(255)
+  `Region` varchar(255),
+  `Status` tinyint
 );
 
 CREATE TABLE `Cliente` (
@@ -12,7 +13,8 @@ CREATE TABLE `Cliente` (
   `Apellidos` varchar(255),
   `RFC` varchar(255) PRIMARY KEY,
   `correo` varchar(255),
-  `ID_Region` int
+  `ID_Region` int,
+  `Status` tinyint
 );
 
 CREATE TABLE `Factura` (
@@ -38,12 +40,14 @@ CREATE TABLE `Producto` (
   `Cantidad` integer,
   `Precio` float4,
   `fecha_creacion` date,
-  `ID_Categoria` int
+  `ID_Categoria` int,
+  `Status` tinyint
 );
 
 CREATE TABLE `Categoria` (
   `ID` int PRIMARY KEY AUTO_INCREMENT,
-  `Categoria` varchar(255)
+  `Categoria` varchar(255),
+  `Status` tinyint
 );
 
 ALTER TABLE `Cliente` ADD FOREIGN KEY (`ID_Region`) REFERENCES `Region` (`ID`);

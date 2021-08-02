@@ -18,6 +18,6 @@ WHILE v_count <= v_size
 				SET v_size = 0;
 			END IF;
 	END WHILE;
-INSERT INTO Articulo Values(v_count,p_codigo,p_cantidad,p_impuesto,p_id_factura); 
+INSERT INTO Articulo Values(v_count,p_codigo,p_cantidad,p_impuesto,p_id_factura,1); 
 END;
 //
