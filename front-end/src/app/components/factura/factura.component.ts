@@ -45,6 +45,11 @@ export class FacturaComponent implements OnInit {
 
   }
 
+  getProductos(){
+    this.productos = [new Producto(1, "codigo", "nombre", "describe", 1, 2, new Date("12 12 1997"), 1)]
+
+  }
+
   detalleArticulos(id_factura: number){
   for (let a of this.facturas){
       if (id_factura == a.id ){

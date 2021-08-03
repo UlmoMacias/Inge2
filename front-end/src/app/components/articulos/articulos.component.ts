@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+
+declare var $: any
+
 @Component({
   selector: 'app-articulos',
   templateUrl: './articulos.component.html',
