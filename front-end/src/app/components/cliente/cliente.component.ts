@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { Region } from 'src/app/_models/region';
 import { ClienteService } from 'src/app/_services/cliente.service';
 import {Cliente} from '../../_models/cliente'
 import {RegionService} from 'src/app/_services/region.service'
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 declare var $:any;
 
@@ -35,15 +35,17 @@ export class ClienteComponent implements OnInit {
 
     this.clientes = [new Cliente(1,"nombre", "apellido", "rfc1", "correo", 1),new Cliente(1,"nombre", "apellido", "rfc2", "correo", 2)]
     console.log(this.clientes.length )
-    /*this.clienteService.getClientes().subscribe(
-      res => {
-        this.clientes = res
-      },
-      err => {
-        console.error(err)
-      }
-    )
-    */
+//    this.clienteService.getClientes().subscribe(
+//    res => {
+//      this.clientes = res
+//      console.log(res)
+//      },
+//      err => {
+//        console.log(err)
+//      }
+
+        //)
+    
   }
 
   getRegiones(){

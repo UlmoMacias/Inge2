@@ -12,7 +12,7 @@ export class ClienteService {
   constructor(private http: HttpClient) { }
 
   getClientes(){
-    return this.http.get(this.API_URI+"/clientes");
+    return this.http.get(this.API_URI+"/cliente");
   }
 
   getCliente(id: number){

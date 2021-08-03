@@ -1,7 +1,7 @@
 export class Producto{
 
     id : number
-    codigo : number
+    codigo : String
     nombre: String
     descripcion : String
     cantidad : number
@@ -12,7 +12,7 @@ export class Producto{
 
   constructor(
     id: number, 
-    codigo: number, 
+    codigo: String, 
     nombre: String, 
     descripcion: String, 
     cantidad: number, 

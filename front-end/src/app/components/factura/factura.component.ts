@@ -7,6 +7,7 @@ import {Cliente} from '../../_models/cliente'
 import {Articulo} from '../../_models/articulo'
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import {ActivatedRoute } from '@angular/router'
+import { ProductosService } from 'src/app/_services/productos.service';
 
 
 declare var $: any
@@ -22,7 +23,7 @@ export class FacturaComponent implements OnInit {
   articulos : Articulo [] | any
   productos : Producto [] | any
 
-  constructor(private route: ActivatedRoute, private facturaService: FacturaService) { }
+  constructor(private route: ActivatedRoute, private facturaService: FacturaService, private productosService: ProductosService) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => { 
@@ -32,8 +33,8 @@ export class FacturaComponent implements OnInit {
   }
   getFacturas(){
     
-  this.facturas = [new Factura(1, new Date("11 08 2019 ") , this.rfc, 12, 234, 123.45, 5656, [new Articulo(1,123,"asdasd", 34, 56, 1,12, 123 )]), new Factura(2, new Date("11 08 2019 ") , this.rfc, 12, 234, 123.45, 5656, [new Articulo(1,123,"asdasd", 34, 56, 1,12, 123 )]),new Factura(1, new Date("11 08 2019 ") , this.rfc, 12, 234, 123.45, 5656, [new Articulo(1,123,"asdasd", 34, 56, 1,12, 123 )]), new Factura(2, new Date("11 08 2019 ") , this.rfc, 12, 234, 123.45, 5656, [new Articulo(1,123,"asdasd", 34, 56, 1,12, 123 )]),new Factura(1, new Date("11 08 2019 ") , this.rfc, 12, 234, 123.45, 5656, [new Articulo(1,123,"asdasd", 34, 56, 1,12, 123 )]), new Factura(2, new Date("11 08 2019 ") , this.rfc, 12, 234, 123.45, 5656, [new Articulo(1,123,"asdasd", 34, 56, 1,12, 123 )])]
-//    this.facturaService.getFacturas().subscribe(
+  this.facturas = [new Factura(1, new Date("11 08 2019 ") , this.rfc, 12, 234, 123.45, 5656, [new Articulo(1,123,"codigo", 34, 56, 1,12, 123 ),new Articulo(2,123,"codigo1", 34, 56, 1,12, 123 ),new Articulo(3,123,"codigo2", 34, 56, 1,12, 123 )  ])]
+//    this.facturaService.getFacturas(this.rfc).subscribe(
 //      res => {
 //        this.facturas = res
 //      },
@@ -44,22 +45,39 @@ export class FacturaComponent implements OnInit {
 
   }
 
-  detalleArticulos(id: number){
-    for (let a of this.facturas){
-      if (id == a.id ){
+  detalleArticulos(id_factura: number){
+  for (let a of this.facturas){
+      if (id_factura == a.id ){
           this.articulos = a.articulos
-          console.log(JSON.stringify( a.articulos))          
+          
         }
       }
-
 
     $("#nuevo").modal({
       backdrop: 'static'
     });
     $("#nuevo").modal("show")
+  }
 
+  detallesProducto(codigo:String ){
+      this.productos = [new Producto(1, "codigo", "nombre", "describe", 1, 2, new Date("12 12 1997"), 1)]
+//    this.productos.getProducto(codigo).subscribe(
+//      res => {
+//        this.productos = res
+//      },
+//      err => {
+//        console.error(err)
+//      }
+//    )
+    
 
- 
+    $("#nuevo").modal("hide")
+
+    $("#productos").modal({
+      backdrop: 'static'
+    });
+    $("#productos").modal("show")
+    console.log("detalles producto")
 
   }
 

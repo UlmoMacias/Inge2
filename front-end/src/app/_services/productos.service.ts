@@ -15,7 +15,7 @@ export class ProductosService {
     return this.http.get(this.API_URI+'/producto')
   }
 
-  getProducto(codigo: number){
+  getProducto(codigo: String){
     return this.http.get(this.API_URI+'/producto/'+codigo)
   }
 

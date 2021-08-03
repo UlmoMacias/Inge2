@@ -62,8 +62,7 @@
                     <button class="btn btn-warning btn-sm"><i class="fas fa-edit"></i>&nbsp; Editar</button>
                 </div>
                 <div class="card-body text-center">
-                    Cliente
-                    <p> {{factura.rfc_cliente }}</p>
+
                     Creacion
                     <p>{{factura.fecha_creacion | date:'dd-MM-yyyy'}}</p>
                     Subtotal
@@ -100,7 +99,7 @@
                     <div class="card  mb-3">
                         <div class="card-header d-flex justify-content-between align-items-center ">
                             Código : {{articulo.codigo}}
-                            <button class="btn btn-info btn-sm"><i class="fas fa-info-circle"></i>&nbsp; Detalles</button>
+                            <button class="btn btn-info btn-sm" (click)="detallesProducto(articulo.codigo)"><i class="fas fa-info-circle"></i>&nbsp; Productos</button>
                         </div>
                         <div class="card-body text-center">
                             Cantidad: {{articulo.cantidad}}
@@ -108,6 +107,39 @@
                             <br> Precio Unitario: {{articulo.precio_unitario}}
                             <br> Sub Total: {{articulo.subtotal}}
                             <br> Total: {{articulo.total}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="productos">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class=" text-center modal-header ">
+                <h5 class="modal-title">Detalles de Productos</h5>
+            </div>
+            <div class="modal-body">
+                <div *ngFor="let producto of productos">
+                    <div class="card  mb-3">
+                        <div class="card-header d-flex justify-content-between align-items-center ">
+                            Producto: {{producto.nombre}}
+
+                        </div>
+                        <div class="card-body text-center">
+                            Código : {{producto.codigo}}
+                            <br> {{producto.descripcion}}
+                            <br> Cantidad : {{producto.cantidad}}
+                            <br> $ {{producto.precio}}
+                            <br> Creación:
+                            <p> {{producto.fecha_creacion | date:'dd-MM-yyyy'}}</p>
                         </div>
                     </div>
                 </div>
