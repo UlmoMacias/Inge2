@@ -45,6 +45,15 @@ export class FacturaComponent implements OnInit {
 
   }
 
+  eliminaFactura(id_factura : number){
+    console.log("eliminaFactura: "+ id_factura)
+  }
+
+  editarFactura(id_factura: number){
+    console.log("editar factura: "+ id_factura)
+  }
+
+
   getProductos(){
     this.productos = [new Producto(1, "codigo", "nombre", "describe", 1, 2, new Date("12 12 1997"), 1)]
 
