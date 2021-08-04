@@ -51,8 +51,7 @@
 
 
 
-    <h3 class="text-center" *ngIf="facturas.length > 0">Facturas del Cliente <br> <span
-            class="badge rounded-pill bg-primary"> {{rfc}}</span> <br></h3>
+    <h3 class="text-center" *ngIf="facturas.length > 0">Facturas del Cliente <br> <span class="badge rounded-pill bg-primary"> {{rfc}}</span> <br></h3>
     <div class="text-center" *ngIf="facturas.length > 0">
         <button class="btn btn-success btn-sm"><a style="color: white; text-decoration:none;"
                 href="clientes/facturas/nueva?rfc={{rfc}}"><i class="fas fa-plus"></i>&nbsp;Nueva Factura</a></button>
@@ -62,9 +61,8 @@
         <div class="col-md-3 " *ngFor="let factura of facturas">
             <div class="card" style="min-height: 300px; min-width: 100px;">
                 <div class="card-header d-flex justify-content-between align-items-center ">
-                    Factura N° {{factura.id}}
-                    <button class="btn btn-warning btn-sm" (click)="editarFactura(factura.id)"><i
-                            class="fas fa-edit"></i>&nbsp; Editar</button>
+                    <h4> Factura {{factura.id}}</h4>
+
                 </div>
                 <div class="card-body text-center">
                     Creacion
@@ -80,8 +78,7 @@
                 </div>
                 <div class="card-footer">
                     <form>
-                        <button class="btn btn-danger btn-block btn-sm form-control" type="submit"
-                            (click)="eliminaFactura(factura.id)"> <i class="fas fa-trash"></i> &nbsp; Eliminar</button>
+                        <button class="btn btn-danger btn-block btn-sm form-control" type="submit" (click)="eliminaFactura(factura.id)"> <i class="fas fa-trash"></i> &nbsp; Eliminar</button>
                     </form>
 
                 </div>
