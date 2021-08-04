@@ -4,6 +4,7 @@ import { ClienteService } from 'src/app/_services/cliente.service';
 import {Cliente} from '../../_models/cliente'
 import {RegionService} from 'src/app/_services/region.service'
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 declare var $:any;
 
@@ -41,10 +42,9 @@ export class ClienteComponent implements OnInit {
   }
 
 
-
   getClientes(){
 
-    this.clientes = [new Cliente(1,"nombre", "apellido", "rfc1", "correo", 1),new Cliente(1,"nombre", "apellido", "rfc2", "correo", 2)]
+    this.clientes =[] //[new Cliente(1,"nombre", "apellido", "rfc1", "correo", 1),new Cliente(1,"nombre", "apellido", "rfc2", "correo", 2)]
 //    this.clienteService.getClientes().subscribe(
 //    res => {
 //      this.clientes = res
@@ -72,6 +72,7 @@ export class ClienteComponent implements OnInit {
 
   agregarCliente(){
     this.clienteForm.reset()
+    
     $("#nuevo").modal("show")
   }
 
@@ -98,10 +99,26 @@ export class ClienteComponent implements OnInit {
                               this.clienteForm.value.correo,
                               id_region)
                               
-    console.log(id_region)
-    console.log(newCliente)
+//    this.clienteService.createCliente(newCliente).subscribe(
+//      res =>{
+//
+//        this.submitted=false
+//        $("#nuevo").modal("hide")
+//        this.showSucces("Agregado!")
+//        this.getClientes()
+//      },
+//      err => {
+      
+//        this.showFail("Algo salio mal ")
+//
+//      }
+//    )
+
+
     this.submitted=false
     $("#nuevo").modal("hide")
+    this.showSucces("Agregado!")
+
     
   }
 
@@ -110,5 +127,18 @@ export class ClienteComponent implements OnInit {
 
   get f () {return this.clienteForm.controls}
 
+  showFail(message){
+    Swal.fire({
+      icon: 'error',
+      title: message
+      
+    });
+  }
 
+  showSucces(message){
+    Swal.fire({
+      icon: 'success',
+      title: message,
+    });
+  }
 }

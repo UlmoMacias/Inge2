@@ -1,17 +1,40 @@
 <app-navbar></app-navbar>
 
 
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="clientes.length == 0">
+
+
     <br>
 
-    <h3 *ngIf="clientes.length > 0" class="text-center">Clientes &nbsp;<i class="fas fa-users"></i> <br></h3>
+
+    <h3 class="text-center">Clientes <i class="fas fa-users"></i> <br></h3>
+
+    <div class="text-center">
+        <button type="button" class="btn btn-success btn-lg" (click)="agregarCliente()"><i class="fas fa-plus"></i>&nbsp; Nuevo Cliente</button>
+    </div>
+    <br>
+    <div class="text-center">
+        <img src="http://drive.google.com/uc?export=view&id=1Zh4x1lD3hot489tq7B9hiD7ey1A__ibQ" style="width: 800px; height:400px " />
+    </div>
+    <br>
+    <div class="alert alert-danger text-center">
+
+        <strong>
+            <h5>¡No hay Clientes! </h5>
+        </strong> Agrega uno
+    </div>
+</div>
 
 
-    <div *ngIf="clientes.length > 0" class="text-center">
+<div class="container-fluid" *ngIf="clientes.length > 0">
+    <br>
+    <h3 class="text-center">Clientes &nbsp;<i class="fas fa-users"></i> <br></h3>
+
+    <div class="text-center">
         <button type="button" class="btn btn-success btn-sm" (click)="agregarCliente()"><i class="fas fa-plus"></i>&nbsp; Nuevo Cliente</button>
     </div>
     <br>
-    <div *ngIf="clientes.length > 0">
+    <div>
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -50,7 +73,7 @@
 <div class="modal fade" id="nuevo">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class=" text-center modal-header ">
+            <div class="modal-header ">
                 <h5 class="modal-title">Nuevo cliente <i class="fas fa-user-plus"></i></h5>
 
             </div>
