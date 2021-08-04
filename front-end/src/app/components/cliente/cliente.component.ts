@@ -44,7 +44,7 @@ export class ClienteComponent implements OnInit {
 
   getClientes(){
 
-    this.clientes =[] //[new Cliente(1,"nombre", "apellido", "rfc1", "correo", 1),new Cliente(1,"nombre", "apellido", "rfc2", "correo", 2)]
+    this.clientes = []//[new Cliente(1,"nombre", "apellido", "rfc1", "correo", 1),new Cliente(1,"nombre", "apellido", "rfc2", "correo", 2)]
 //    this.clienteService.getClientes().subscribe(
 //    res => {
 //      this.clientes = res
@@ -118,7 +118,7 @@ export class ClienteComponent implements OnInit {
     this.submitted=false
     $("#nuevo").modal("hide")
     this.showSucces("Agregado!")
-
+    
     
   }
 

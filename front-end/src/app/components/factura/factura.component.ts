@@ -33,7 +33,7 @@ export class FacturaComponent implements OnInit {
   }
   getFacturas() {
 
-    this.facturas = [new Factura(1, new Date("11 08 2019 "), this.rfc, 12, 234, 123.45, 5656, [new Articulo(1, 123, "codigo", 34, 56, 1, 12, 123), new Articulo(2, 123, "codigo1", 34, 56, 1, 12, 123), new Articulo(3, 123, "codigo2", 34, 56, 1, 12, 123)])]
+    this.facturas = []//[new Factura(1, new Date("11 08 2019 "), this.rfc, 12, 234, 123.45, 5656, [new Articulo(1, 123, "codigo", 34, 56, 1, 12, 123), new Articulo(2, 123, "codigo1", 34, 56, 1, 12, 123), new Articulo(3, 123, "codigo2", 34, 56, 1, 12, 123)])]
     //    this.facturaService.getFacturas(this.rfc).subscribe(
     //      res => {
     //        this.facturas = res

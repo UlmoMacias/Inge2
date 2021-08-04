@@ -4,49 +4,21 @@
 
     <div *ngIf="facturas.length == 0" class="text-center">
 
-        <div class="alert alert-dismissible alert-danger">
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <h3 class="text-center">Facturas del Cliente <br> <span class="badge rounded-pill bg-primary"> {{rfc}}</span> <br></h3>
+        <button class="btn btn-success btn-sm"><a style="color: white; text-decoration:none;"
+                href="clientes/facturas/nueva?rfc={{rfc}}"><i class="fas fa-plus"></i>&nbsp;Nueva Factura</a>
+        </button>
+        <br>
+        <br>
+        <img src="http://drive.google.com/uc?export=view&id=1gKwNDwbGhJJIGCEGqywQs8F-9c9ma_Oe" style="width: 400px; height:400px " />
+        <br>
+        <br>
+        <div class="alert alert-danger text-center">
             <strong>
                 <h5>¡No hay Facturas! </h5>
             </strong> Agrega una
         </div>
 
-        <div class="col-md-3 mx-auto">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Agregar Factura</h4>
-                </div>
-                <div class="card-body">
-
-                    <div class="form-floating mb-1">
-                        <input type="number" class="form-control" id="subTotal" placeholder="Sub Total" min="0">
-                        <label>Sub Total</label>
-                    </div>
-
-                    <div class="form-floating mb-1">
-                        <input type="date" class="form-control" id="creacion" placeholder="Creación">
-                        <label>Creación </label>
-                    </div>
-                    <div class="form-floating mb-1">
-                        <input type="number" class="form-control" id="impuestos" placeholder="impuestos" min="0">
-                        <label>impuestos</label>
-                    </div>
-                    <div class="form-floating mb-1">
-                        <input type="number" class="form-control" id="total" placeholder="Total" min="0">
-                        <label>Total</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="id_region" placeholder="Region" min="0">
-                        <label>Articulos</label>
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-block form-control">Guardar</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
     </div>
 
 
