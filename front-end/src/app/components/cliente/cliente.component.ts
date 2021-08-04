@@ -16,8 +16,8 @@ export class ClienteComponent implements OnInit {
 
   clientes : Cliente [] | any 
   regiones : Region [] | any
-  clienteForm : FormGroup
-  summited = false
+  clienteForm : FormGroup | any
+  submitted = false
 
   constructor(
     private clienteService: ClienteService , 
@@ -26,16 +26,14 @@ export class ClienteComponent implements OnInit {
 
   ngOnInit(): void {
 
-  this.clienteForm = this.formBuilder.group(
-    {
-      id: [''],
-      nombres: ['', Validators.required],
-      apellidos : ['', Validators.required],
+  this.clienteForm = this.formBuilder.group({ 
+      id : [''],
+      nombres : ['', Validators.required],
+      apellidos: ['', Validators.required],
       rfc: ['', Validators.required],
-      correo : ['', Validators.required],
-      id_region : ['', Validators.required]
-    }
-  )
+      correo: ['', Validators.required],
+      region: ['', Validators.required]
+    })
 
   this.getClientes()
   this.getRegiones()
@@ -73,16 +71,44 @@ export class ClienteComponent implements OnInit {
   }
 
   agregarCliente(){
-    $("#nuevo").modal({
-      backdrop: 'static'
-    });
+    this.clienteForm.reset()
     $("#nuevo").modal("show")
   }
 
-
+  buscaRegion(region: String){
+    for (let i of this.regiones){
+      if (region == i.region){
+        return i.id
+      }
+    }
+  }
   createCliente(){
+    console.log(JSON.stringify( this.clienteForm.value));
+    this.submitted = true
+    if(this.clienteForm.invalid){
+      console.log("Formulario invalido")
+      return
+    }
+    
+    const id_region = this.buscaRegion(this.clienteForm.value.region)
+    const newCliente =  new Cliente(null,
+                              this.clienteForm.value.nombres, 
+                              this.clienteForm.value.apellidos, 
+                              this.clienteForm.value.rfc, 
+                              this.clienteForm.value.correo,
+                              id_region)
+                              
+    console.log(id_region)
+    console.log(newCliente)
+    this.submitted=false
+    $("#nuevo").modal("hide")
     
   }
+
+
+
+
+  get f () {return this.clienteForm.controls}
 
 
 }

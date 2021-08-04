@@ -3,52 +3,9 @@
 
 <div class="container-fluid">
     <br>
-    <h3 *ngIf="clientes.length > 0" class="text-center">Clientes <br></h3>
 
-    <div *ngIf="clientes.length == 0" class="text-center">
+    <h3 *ngIf="clientes.length > 0" class="text-center">Clientes &nbsp;<i class="fas fa-users"></i> <br></h3>
 
-        <div class="alert alert-dismissible alert-danger">
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            <strong><h5>¡No hay Clientes!</h5></strong> Agrega uno
-        </div>
-
-        <div class="col-md-3 mx-auto">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Agregar Cliente</h3>
-                </div>
-                <div class="card-body">
-
-                    <div class="form-floating mb-1">
-                        <input type="text" class="form-control" id="nombres" placeholder="Nombre(s)">
-                        <label>Nombre(s)</label>
-                    </div>
-
-                    <div class="form-floating mb-1">
-                        <input type="text" class="form-control" id="apellidos" placeholder="apellidos">
-                        <label>Apellidos</label>
-                    </div>
-                    <div class="form-floating mb-1">
-                        <input type="text" class="form-control" id="rfc" placeholder="apellidos">
-                        <label>RFC</label>
-                    </div>
-                    <div class="form-floating mb-1">
-                        <input type="email" class="form-control" id="correo" placeholder="apellidos">
-                        <label>Correo</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="id_region" placeholder="Region" min="0">
-                        <label>Region</label>
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-block form-control">Guardar</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div *ngIf="clientes.length > 0" class="text-center">
         <button type="button" class="btn btn-success btn-sm" (click)="agregarCliente()"><i class="fas fa-plus"></i>&nbsp; Nuevo Cliente</button>
@@ -89,47 +46,77 @@
 </div>
 
 
+
 <div class="modal fade" id="nuevo">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class=" text-center modal-header ">
-                <h5 class="modal-title">Nuevo cliente</h5>
-            </div>
-            <div class="modal-body">
+                <h5 class="modal-title">Nuevo cliente <i class="fas fa-user-plus"></i></h5>
 
-                <div class="form-group">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="nombres" placeholder="Nombre(s)">
-                        <label>Nombre(s)</label>
+            </div>
+            <form [formGroup]="clienteForm" (ngSubmit)="createCliente()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="form-floating mb-1">
+                            <input type="text" id="nombres" formControlName="nombres" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nombres.errors }" placeholder="Nombres">
+                            <label>Nombre(s) </label>
+                            <div *ngIf="submitted && f.nombres.errors" class="invalid-feedback">
+                                <div *ngIf="f.nombre.errors.required">El nombre del Cliente es obligatorio</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="apellidos" placeholder="apellidos">
-                        <label>Apellidos</label>
+
+                    <div class="form-group">
+                        <div class="form-floating mb-1">
+                            <input type="text" id="apellidos" formControlName="apellidos" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.apellidos.errors }" placeholder="Apellidos">
+                            <label>Apellidos </label>
+                            <div *ngIf="submitted && f.apellidos.errors" class="invalid-feedback">
+                                <div *ngIf="f.apellidos.errors.required">El nombre del Cliente es obligatorio</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="rfc" placeholder="apellidos">
-                        <label>RFC</label>
+
+                    <div class="form-group">
+                        <div class="form-floating mb-1">
+                            <input type="text" id="rfc" formControlName="rfc" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.rfc.errors }" placeholder="RFC">
+                            <label>rfc</label>
+                            <div *ngIf="submitted && f.rfc.errors" class="invalid-feedback">
+                                <div *ngIf="f.rfc.errors.required">El nombre del Cliente es obligatorio</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="correo" placeholder="apellidos">
-                        <label>Correo</label>
+
+                    <div class="form-group">
+                        <div class="form-floating mb-1">
+                            <input type="email" id="correo" formControlName="correo" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.correo.errors }" placeholder="Correo">
+                            <label>correo</label>
+                            <div *ngIf="submitted && f.correo.errors" class="invalid-feedback">
+                                <div *ngIf="f.correo.errors.required">El nombre del Cliente es obligatorio</div>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="form-group">
                         <label for="exampleSelect1" class="form-label mt-4">Región</label>
-                        <select class="form-select" id="exampleSelect1">
-                        <ng-container *ngFor="let region of regiones">
-                          <option>{{region.region}}</option>
-                        </ng-container>
-
+                        <select class="form-control" id="region" formControlName="region" placeholder="asdsad">
+                            
+                            <ng-container *ngFor="let region of regiones">
+                                <option >{{region.region}}</option>
+                            </ng-container>
                         </select>
-                    </div>
-                </div>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Agregar</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
+                        <div *ngIf="submitted && f.region.errors" class="invalid-feedback">
+                            <div *ngIf="f.region.required">La region es obligatoria</div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary">Agregar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
