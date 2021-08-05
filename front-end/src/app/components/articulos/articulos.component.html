@@ -3,7 +3,10 @@
 </div>
 <br>
 <div class="container-fluid"> 
-    <h2 class="text-center">Productos</h2><br>             
+    <h2 class="text-center">Productos</h2><br> 
+    <div class="text-center">
+    <button class="btn btn-primary btn-sm form-control" type="button" (click)="Vercarrito()">   <i class="fas fa-cart-plus"></i> &nbsp; Ver carrito</button>            
+    </div>
     <div class="row" >
          <div class="col-md-3 " *ngFor="let art of productos">
             <div class="card" style="min-height: 200px; min-width: 100px;">
@@ -14,21 +17,76 @@
                         <p>$ &nbsp; {{art.precio}}</p>
                         <p>{{art.descripcion}}</p>
                         <p>{{art.codigo}}</p>
+
                         <p>{{art.cantidad}}</p>
                         <p>{{art.id_categoria}}</p>
                         <p>{{art.fecha_creacion | date:'dd-MM-yyyy'}}</p>
                         <div class="card-footer">
-                            <button class="btn btn-success btn-block btn-sm form-control" type="button" (click)="aniadir(art)">   <i class="fas fa-cart-plus"></i> &nbsp; Agregar a carrito</button>
-                        </div>
-                    </div>    
-                    </div>
-                    </div>
-                    <br>
-                 </div>
-                 <div class="text-center"><button type="button" class="btn btn-success btn-lg">Guardar</button>
-        </div>
-                </div>
+                            <form [formGroup]="carritoForm" (ngSubmit)="obtenerCantidad()">
+                            
 
+                                Cantidad: 
+                                <div class="form-group">
+                                    <div>
+                                        <input type="number" id="cantidad" formControlName="cantidad" 
+                                        class="form-control"  min="0">
+                                    </div>
+                                </div>
+                                <input id="prodId" name="prodId" type="hidden" value=art>
+
+
+                                <br>
+                                <div class="modal-footer">
+                                    <button class="btn btn-success btn-block btn-sm form-control" 
+                                    type="button"> <i class="fas fa-cart-plus"></i> &nbsp; </button>
+                                </div>
+                                
+                            </form>
+                        </div>
+                </div>    
+            </div>
+        </div>
+        <br>
+    </div>
+    <div class="text-center"><button type="button" class="btn btn-success btn-lg">Guardar</button>
+    </div>
+                </div>
+                <div class="modal fade" id="carrito">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class=" text-center modal-header ">
+                                <h5 class="modal-title">Detalles de Carrito</h5>
+                            </div>
+                            <div class="modal-body">
+                                <div *ngIf="carrito.length==0" class="text-center">
+                                    No hay productos en el carrito <br>
+                                    <i class="fas fa-cart-arrow-down"></i>
+                                </div>
+                                <div *ngFor="let producto of carrito">
+                                    <div class="card  mb-3">
+                                        <div class="card-header d-flex justify-content-between align-items-center ">
+                                            Producto: {{producto.nombre}}
+                
+                                        </div>
+                                        <div class="card-body text-center">
+                                            Código : {{producto.codigo}}
+                                            <br> {{producto.descripcion}}
+                                            <br> Cantidad : {{producto.cantidad}}
+                                            <br> $ {{producto.precio}}
+                                            <br> Creación:
+                                            <p> {{producto.fecha_creacion | date:'dd-MM-yyyy'}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <div class="modal-footer">
+                
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
 <div>

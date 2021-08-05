@@ -4,6 +4,8 @@ import { Producto } from 'src/app/_models/producto';
 import { ArticulosService } from 'src/app/_services/articulos.service';
 import { ProductosService } from 'src/app/_services/productos.service';
 import { ProductosComponent } from '../productos/productos.component';
+import { FormGroup, FormBuilder } from '@angular/forms'
+import { ThrowStmt } from '@angular/compiler';
 
 declare var $: any
 
@@ -15,12 +17,18 @@ declare var $: any
 export class ArticulosComponent implements OnInit {
   
   articulos : Articulo [] | any
-  carrito : Articulo [] | any
-  productos : Producto[] | any
+  carrito : Producto [] = []; 
+  productos : Producto [] | any
+  carritoForm : FormGroup | any
   constructor(
-    private articulosService: ArticulosService) { };
+    private articulosService: ArticulosService, private formBuilder: FormBuilder) { };
 
   ngOnInit(): void {
+    this.carritoForm=this.formBuilder.group(
+      {
+        cantidad:[' ']
+      }
+    );
     this.getArticulos()
     this.getProductos()
   };
@@ -51,8 +59,20 @@ export class ArticulosComponent implements OnInit {
 
   }
   aniadir(producto: Producto){
+    //Cantidad 
+    //Mostrar carrito
     console.log("agregando"+ JSON.stringify(producto))
-    this.carrito.append(producto)
+    this.carrito.push(producto)
     console.log(JSON.stringify(this.carrito))
   }
+  Vercarrito(){
+    $("#carrito").modal("show")
+  }
+
+
+  obtenerCantidad(){
+    console.log("Este es el obtener Cantidad")
+
+  }
+
 }
