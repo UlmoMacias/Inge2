@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Articulo } from 'src/app/_models/articulo';
-import { ArticulosService } from 'src/app/_services/articulos.service'
+import { Producto } from 'src/app/_models/producto';
+import { ArticulosService } from 'src/app/_services/articulos.service';
+import { ProductosService } from 'src/app/_services/productos.service';
+import { ProductosComponent } from '../productos/productos.component';
 
 declare var $: any
 
@@ -12,11 +15,14 @@ declare var $: any
 export class ArticulosComponent implements OnInit {
   
   articulos : Articulo [] | any
+  carrito : Articulo [] | any
+  productos : Producto[] | any
   constructor(
     private articulosService: ArticulosService) { };
 
   ngOnInit(): void {
     this.getArticulos()
+    this.getProductos()
   };
 
   //
@@ -40,6 +46,13 @@ export class ArticulosComponent implements OnInit {
     //
     //    )
   }
+  getProductos(){
+    this.productos = [new Producto(1, "codigo2", "nombre", "descripcion", 1, 100, new Date("03 08 2021"), 12)]
 
-
+  }
+  aniadir(producto: Producto){
+    console.log("agregando"+ JSON.stringify(producto))
+    this.carrito.append(producto)
+    console.log(JSON.stringify(this.carrito))
+  }
 }
