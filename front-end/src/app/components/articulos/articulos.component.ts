@@ -5,10 +5,10 @@ import { Region } from 'src/app/_models/region';
 import { ArticulosService } from 'src/app/_services/articulos.service';
 import { ProductosService } from 'src/app/_services/productos.service';
 import { ProductosComponent } from '../productos/productos.component';
-import { FormGroup, FormBuilder } from '@angular/forms'
-import { ThrowStmt } from '@angular/compiler';
-
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import {Producto} from 'src/app/_models/producto';
 import { FacturaService } from 'src/app/_services/factura.service';
+import Swal from 'sweetalert2';
 
 declare var $: any
 
@@ -21,9 +21,11 @@ export class ArticulosComponent implements OnInit {
   
   articulos : Articulo [] | any
   factura : Factura [] | any
-  carrito : Articulo [] = []; 
+  carrito : Producto [] = []; 
   productos : Producto [] | any
   carritoForm : FormGroup | any
+  agregando: Producto
+  cantidad : number
   submitted = false
   constructor(
     private articulosService: ArticulosService, private formBuilder: FormBuilder) { };
@@ -31,108 +33,75 @@ export class ArticulosComponent implements OnInit {
   ngOnInit(): void {
     this.carritoForm=this.formBuilder.group(
       {
-        cantidad:[' ']
+        cantidad:['', Validators.required]
       }
     );
-    this.getArticulos()
+    
     this.getProductos()
   };
 
-  //
-  // id: number
-  // cantidad: number
-  // codigo: String
-  // impuesto: number
-  // precio_unitario: number
-  // subtotal: number
-  // total: number
-  // id_factura: number
-  getArticulos() {
-    this.articulos = [new Articulo(1, 2, "codigo1", 0.23, 15, 30, 30.23, 1), new Articulo(2, 3, "codigo2", 0.32, 20, 40, 40.32, 2) ]
-    //    this.regionService.getRegiones().subscribe(
-    //      res=>{
-    //        this.regiones = res
-    //      },
-    //      err=>{
-    //        console.error(err)
-    //      }
-    //
-    //    )
-  }
   getProductos(){
-    this.productos = [new Producto(1, "codigo2", "nombre", "descripcion", 1, 100, new Date("03 08 2021"), 12),
-                      new Producto(2, "codigo3", "nombrasde", "desacripcion", 1, 100, new Date("03 08 2021"), 12)]
+    this.productos = [new Producto(1, "codigo2", "p1", "descripcion", 1, 100, new Date("03 08 2021"), 12),
+                      new Producto(2, "codigo3", "p2", "desacripcion", 1, 100, new Date("03 08 2021"), 12),
+                      new Producto(3, "codigo3", "p3", "desacripcion", 1, 100, new Date("03 08 2021"), 12)]
 
   }
-  aniadir(producto: Producto){
-    //Cantidad 
-    //Mostrar carrito
-    console.log("agregando"+ JSON.stringify(producto))
-    this.carrito.push(producto)
-    console.log(JSON.stringify(this.carrito))
+  agregar(producto: Producto){
+    this.agregando = producto
+    this.carritoForm.reset()
+    $("#cantidad").modal("show")
+    
   }
-  Vercarrito(){
+  vercarrito(){
     $("#carrito").modal("show")
   }
 
 
+
   obtenerCantidad(){
-    console.log("Este es el obtener Cantidad")
-    console.log(JSON.stringify(this.carritoForm.value));
+    
     this.submitted = true
-    if (this.carritoForm.invalid) {
-      console.log("Formulario invalido")
+
+    if(this.carritoForm.invalid){ 
+      this.showFail("inserta una cantidad :D")
       return
     }
 
-    // Se parsea el JSON a lista de Articulos
-    this.carrito = [new Articulo(1, 2, "codigo1", 0.23, 15, 30, 30.23, 1)]
-
-    //
-
-
+    this.showSucces("Hecho! \n Se agregaron "+this.carritoForm.value.cantidad)    
+    console.log("cantidad:" +this.carritoForm.value.cantidad)
+    $("#cantidad").modal("hide")
+    this.submitted=false
+    this.cantidad = this.carritoForm.value.cantidad
+    this.carrito.push(this.agregando)
 
 
     
-    
-    this.submitted = false
-    $("#nuevo").modal("hide")
-    this.showSucces("Agregado!")
-    
+  }
 
-
-
-    //    this.CarritoService.createCarrito(newCarrito).subscribe(
-      //      res =>{
-        //
-        //        this.submitted=false
-        //        $("#nuevo").modal("hide")
-        //        this.showSucces("Agregado!")
-        //        this.getCarritos()
-        //      },
-        //      err => {
-
-          //        this.showFail("Algo salio mal ")
-          //
-          //      }
-          //    )
-
+  eliminarDeCarrito(id){
+    console.log(id)
   }
 
 
 
+  get f () {return this.carritoForm.controls}
+
+  showFail(message){
+    Swal.fire({
+      icon: 'error',
+      title: message
+      
+    });
+  }
+
+  showSucces(message){
+    Swal.fire({
+      icon: 'success',
+      title: message,
+    });
+  }
 
 
-
-
-
-
-
-
-  crear_FActura(listaObjetos,listaCAntidad)
-  sadjasdjsda
-
-  add_Factura(Factura)
 
 
 
