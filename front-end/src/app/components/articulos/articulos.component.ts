@@ -9,6 +9,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import {Producto} from 'src/app/_models/producto';
 import { FacturaService } from 'src/app/_services/factura.service';
 import Swal from 'sweetalert2';
+import {Cantidad} from 'src/app/_models/cantidad'
 
 declare var $: any
 
@@ -25,8 +26,10 @@ export class ArticulosComponent implements OnInit {
   productos : Producto [] | any
   carritoForm : FormGroup | any
   agregando: Producto
-  cantidad : number
+  cantidad : Cantidad [] = []
   submitted = false
+  
+  
   constructor(
     private articulosService: ArticulosService, private formBuilder: FormBuilder) { };
 
@@ -57,7 +60,6 @@ export class ArticulosComponent implements OnInit {
   }
 
 
-
   obtenerCantidad(){
     
     this.submitted = true
@@ -71,11 +73,17 @@ export class ArticulosComponent implements OnInit {
     console.log("cantidad:" +this.carritoForm.value.cantidad)
     $("#cantidad").modal("hide")
     this.submitted=false
-    this.cantidad = this.carritoForm.value.cantidad
+    
     this.carrito.push(this.agregando)
-
+    this.cantidad.push(new Cantidad(this.agregando,this.carritoForm.value.cantidad ))
+    
+    for (let i of this.cantidad){
+        console.log(i.producto)
+        console.log(i.cantidad)
+    }
 
     
+
   }
 
   eliminarDeCarrito(id){

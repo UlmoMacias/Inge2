@@ -9,7 +9,6 @@ export class Producto{
     fecha_creacion : Date
     id_categoria : number
 
-
   constructor(
     id: number, 
     codigo: String, 
@@ -29,6 +28,8 @@ export class Producto{
     this.fecha_creacion = fecha_creacion
     this.id_categoria = id_categoria
   }
+
+  
 
 
 }
