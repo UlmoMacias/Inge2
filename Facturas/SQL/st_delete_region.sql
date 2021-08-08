@@ -10,11 +10,7 @@ INNER JOIN Region WHERE Cliente.ID_Region = Region.ID AND Cliente.Status = 1 AND
 
 SET num_reg = (SELECT COUNT(*) FROM Temp);
 
--- SELECT * From Temp;
-
-DROP TABLE Temp;
-
-
+DROP TABLE Temp; 
 
 IF num_reg < 1
 	THEN
@@ -24,5 +20,3 @@ ELSE
 	END IF;
 END
 //
-
--- DROP PROCEDURE st_delete_region;

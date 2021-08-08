@@ -22,4 +22,3 @@ ELSE
 	END IF;
 END
 //
--- DROP PROCEDURE st_delete_categoria;
