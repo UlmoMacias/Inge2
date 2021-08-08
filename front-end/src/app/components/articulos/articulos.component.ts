@@ -10,6 +10,8 @@ import {Producto} from 'src/app/_models/producto';
 import { FacturaService } from 'src/app/_services/factura.service';
 import Swal from 'sweetalert2';
 import {Cantidad} from 'src/app/_models/cantidad'
+import { ActivatedRoute } from '@angular/router'
+
 
 declare var $: any
 
@@ -20,7 +22,8 @@ declare var $: any
 })
 export class ArticulosComponent implements OnInit {
   
-  articulos : Articulo [] | any
+  rfc: string;
+  articulos : Articulo [] = []
   factura : Factura [] | any
   carrito : Producto [] = []; 
   productos : Producto [] | any
@@ -28,12 +31,17 @@ export class ArticulosComponent implements OnInit {
   agregando: Producto
   cantidad : Cantidad [] = []
   submitted = false
+  generar = false
   
-  
-  constructor(
+  constructor(private route: ActivatedRoute,
     private articulosService: ArticulosService, private formBuilder: FormBuilder) { };
 
   ngOnInit(): void {
+
+    this.route.queryParams.subscribe(
+      params => {
+                  this.rfc = params.rfc;
+    });
     this.carritoForm=this.formBuilder.group(
       {
         cantidad:['', Validators.required]
@@ -44,9 +52,11 @@ export class ArticulosComponent implements OnInit {
   };
 
   getProductos(){
-    this.productos = [new Producto(1, "codigo2", "p1", "descripcion", 1, 100, new Date("03 08 2021"), 12),
-                      new Producto(2, "codigo3", "p2", "desacripcion", 1, 100, new Date("03 08 2021"), 12),
-                      new Producto(3, "codigo3", "p3", "desacripcion", 1, 100, new Date("03 08 2021"), 12)]
+    
+    this.productos = [new Producto(1, "codigo1", "p1", "descripcion", 1, 100, new Date("03 08 2021"), 12),
+                      new Producto(2, "codigo2", "p2", "desacripcion", 1, 100, new Date("03 08 2021"), 12),
+                      new Producto(3, "codigo3", "p3", "desacripcion", 1, 100, new Date("03 08 2021"), 12),
+                      new Producto(4, "codigo4", "p4", "desacripcion", 1, 100, new Date("03 08 2021"), 12)]
 
   }
   agregar(producto: Producto){
@@ -56,6 +66,9 @@ export class ArticulosComponent implements OnInit {
     
   }
   vercarrito(){
+    $("#carrito").modal({
+      backdrop: 'static'
+    });
     $("#carrito").modal("show")
   }
 
@@ -69,20 +82,18 @@ export class ArticulosComponent implements OnInit {
       return
     }
 
-    this.showSucces("Hecho! \n Se agregaron "+this.carritoForm.value.cantidad)    
-    console.log("cantidad:" +this.carritoForm.value.cantidad)
-    $("#cantidad").modal("hide")
-    this.submitted=false
+    if (this.carritoForm.value.cantidad <= this.agregando.cantidad){
     
-    this.carrito.push(this.agregando)
-    this.cantidad.push(new Cantidad(this.agregando,this.carritoForm.value.cantidad ))
-    
-    for (let i of this.cantidad){
-        console.log(i.producto)
-        console.log(i.cantidad)
+      this.showSucces("Hecho! \n Se agregaron "+this.carritoForm.value.cantidad)    
+      console.log("cantidad:" +this.carritoForm.value.cantidad)
+      $("#cantidad").modal("hide")
+      this.submitted=false
+      this.cantidad.push(new Cantidad(this.agregando,this.carritoForm.value.cantidad ))
+  
+    }else{
+      this.showFail("la cantidad es mayor a los productos en stock :C")
+      return
     }
-
-    
 
   }
 
@@ -90,7 +101,28 @@ export class ArticulosComponent implements OnInit {
     console.log(id)
   }
 
+  generarFactura(){
 
+    for (let i of this.cantidad){
+      this.articulos.push(new Articulo(null,i.cantidad, i.producto.codigo, 0,null, null, null, null ))
+    }
+    this.generar = true
+    var today = new Date();
+      today.setDate(today.getDate() + 1);
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0');
+      var yyyy = String(today.getFullYear());
+      
+      const hoy = yyyy + '-' + mm + '-' + dd;
+
+      const factura = new Factura (null, new Date (hoy), this.rfc, null, null, null,null, this.articulos)
+      
+
+      console.log(factura)
+      $("#carrito").modal("hide")
+      this.showSucces("Factura Creada!")
+
+  }
 
   get f () {return this.carritoForm.controls}
 

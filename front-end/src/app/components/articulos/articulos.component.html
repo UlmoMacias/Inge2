@@ -6,25 +6,24 @@
     <br>
     <h2 class="text-center">Productos</h2><br>
     <div class="text-center">
-        <button class="btn btn-primary btn-sm " type="button" (click)="vercarrito()">   <i class="fas fa-cart-plus"></i> &nbsp; Ver carrito</button>
+        <button class="btn btn-primary btn-sm " type="button" (click)="vercarrito()">   <i class="fas fa-cart-plus"></i> &nbsp;Productos en factura</button>
     </div>
     <br>
     <div class="row">
         <div class="col-md-3 " *ngFor="let producto of productos">
-            <div class="card" style="min-height: 200px; min-width: 100px;">
+            <div class="card" style="min-height: 200px; min-width: 100px;" *ngIf="producto.cantidad > 0">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h4>{{producto.nombre}}</h4>
                 </div>
                 <div class="card-body text-center">
-                    <p>$ &nbsp;{{producto.precio}}</p>
-                    <p>{{producto.descripcion}}</p>
-                    <p>{{producto.cantidad}}</p>
-                    <p>{{producto.codigo}}</p>
-                    <p>cat: {{producto.id_categoria}}</p>
-                    <p>{{producto.fecha_creacion | date:'dd-MM-yyyy'}}</p>
+                    <p>precio: $ &nbsp;{{producto.precio}}</p>
+                    <p>descripcion: {{producto.descripcion}}</p>
+                    <p>cantidad : {{producto.cantidad}}</p>
+                    <p>codigo: {{producto.codigo}}</p>
+                    <p>categoria: {{producto.id_categoria}}</p>
+                    <p>creacion: {{producto.fecha_creacion | date:'dd-MM-yyyy'}}</p>
                 </div>
                 <div class="card-footer">
-
                     <div class="form-group">
                         <button class="btn-success btn-block form-control" (click)="agregar(producto)"><i class="fas fa-cart-plus"></i> &nbsp;Añadir al carrito </button>
                     </div>
@@ -40,35 +39,38 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class=" text-center modal-header ">
-                <h5 class="modal-title">Detalles de Carrito</h5>
+                <h5 class="modal-title">Detalles de Productos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div *ngIf="carrito.length==0" class="text-center">
+                <div *ngIf="cantidad.length==0" class="text-center">
                     No hay productos en el carrito <br>
                     <i class="fas fa-cart-arrow-down"></i>
                 </div>
-                <div *ngFor="let producto of carrito">
+                <div *ngFor="let producto of cantidad">
                     <div class="card  mb-3">
                         <div class="card-header d-flex justify-content-between align-items-center ">
-                            {{producto.nombre}}
+                            {{producto.producto.nombre}}
                             <button class="btn btn-danger" (click)="eliminarDeCarrito(producto.id)"> <i class="fas fa-trash"></i></button>
 
                         </div>
                         <div class="card-body text-center">
-                            <p>$ &nbsp;{{producto.precio}}</p>
-                            <p>{{producto.descripcion}}</p>
-                            <p>{{producto.cantidad}}</p>
-                            <p>{{producto.codigo}}</p>
-                            <p>cat: {{producto.id_categoria}}</p>
-                            <p>{{producto.fecha_creacion | date:'dd-MM-yyyy'}}</p>
+                            <p>$ &nbsp;{{producto.producto.precio}}</p>
+                            <p>{{producto.producto.descripcion}}</p>
+                            <p>{{producto.producto.cantidad}}</p>
+                            <p>{{producto.producto.codigo}}</p>
+                            <p>cat: {{producto.producto.id_categoria}}</p>
+                            <p>{{producto.producto.fecha_creacion | date:'dd-MM-yyyy'}}</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="modal-footer">
 
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+            <div class="form-group" *ngIf="cantidad.length > 0">
+                <div>
+                    <button type="button" class="btn btn-primary btn-block form-control" (click)="generarFactura()">Generar Factura</button>
+                </div>
             </div>
         </div>
     </div>
@@ -86,7 +88,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <div class="form-floating mb-1">
-                            <input type="number" id="cantidad" formControlName="cantidad" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.cantidad.errors }" placeholder="Cantidad">
+                            <input type="number" id="cantidad" formControlName="cantidad" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.cantidad.errors }" placeholder="Cantidad" min="0">
                             <label>Cantidad</label>
                             <div *ngIf="submitted && f.cantidad.errors" class="invalid-feedback">
                                 <div *ngIf="f.cantidad.errors.required">Es necesario ingresar una cantidad</div>
