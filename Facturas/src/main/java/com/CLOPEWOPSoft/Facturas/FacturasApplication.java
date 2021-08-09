@@ -24,7 +24,7 @@ public class FacturasApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/*").allowedOrigins("http://localhost:3306");
+				registry.addMapping("/**").allowedOrigins("http://localhost:4200").allowedMethods("POST", "PUT", "GET", "PATCH", "DELETE");
 			}
 		};
 	}

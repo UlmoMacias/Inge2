@@ -34,38 +34,27 @@
         <button type="button" class="btn btn-success btn-sm" (click)="agregarCliente()"><i class="fas fa-plus"></i>&nbsp; Nuevo Cliente</button>
     </div>
     <br>
-    <div>
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th> Id </th>
-                    <th>Nombre</th>
-                    <th>Apellidos</th>
-                    <th>RFC</th>
-                    <th>Correo</th>
-                    <th>Region</th>
-                    <th>Facturas</th>
-                </tr>
-            </thead>
-            <tbody>
-                <ng-container *ngFor="let cliente of clientes">
-                    <tr *ngFor="let region of regiones">
-                        <th *ngIf="region.id== cliente.id_region"> <span class="badge bg-dark">{{cliente.id}}</span> </th>
-                        <th *ngIf="region.id== cliente.id_region">{{cliente.nombres}}</th>
-                        <th *ngIf="region.id== cliente.id_region">{{cliente.apellidos}} </th>
-                        <th *ngIf="region.id== cliente.id_region">{{cliente.rfc}}</th>
-                        <th *ngIf="region.id== cliente.id_region">{{cliente.correo}} </th>
-                        <th *ngIf="region.id== cliente.id_region">{{region.region}}</th>
-                        <th *ngIf="region.id== cliente.id_region">
-                            <button class="btn btn-info btn-sm"><a style="color: white; text-decoration:none;" href="clientes/facturas?rfc={{cliente.rfc}}">Facturas</a>&nbsp; <i class="fas fa-file-alt" style="color: white;"></i></button>
-                        </th>
-                    </tr>
-                </ng-container>
-            </tbody>
-        </table>
+
+    <div class="row">
+        <div class="col-md-4 " *ngFor="let cliente of clientes">
+            <div class="card " style="min-height: 200px; min-width: 100px;">
+                <div class="card-header d-flex justify-content-between align-items-center ">
+                    {{cliente.nombres}} {{cliente.apellidos}}
+                </div>
+                <div class="card-body text-center">
+                    {{cliente.rfc}}
+                    <p> {{cliente.correo}}</p>
+                    <p>{{cliente.id_region.region}}</p>
+
+                </div>
+                <button class="btn btn-primary btn-sm form-control"><a style="color: white; text-decoration:none;" href="clientes/facturas?rfc={{cliente.rfc}}">Facturas</a>&nbsp; <i class="fas fa-file-alt" style="color: white;"></i></button>
+            </div>
+            <br>
+        </div>
 
 
     </div>
+
 </div>
 
 

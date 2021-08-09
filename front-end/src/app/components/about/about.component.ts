@@ -14,4 +14,8 @@ export class AboutComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  info(){
+    $("#modal").modal("show")
+  }
+
 }

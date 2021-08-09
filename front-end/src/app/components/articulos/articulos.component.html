@@ -16,12 +16,12 @@
                     <h4>{{producto.nombre}}</h4>
                 </div>
                 <div class="card-body text-center">
-                    <p>precio: $ &nbsp;{{producto.precio}}</p>
-                    <p>descripcion: {{producto.descripcion}}</p>
-                    <p>cantidad : {{producto.cantidad}}</p>
-                    <p>codigo: {{producto.codigo}}</p>
-                    <p>categoria: {{producto.id_categoria}}</p>
-                    <p>creacion: {{producto.fecha_creacion | date:'dd-MM-yyyy'}}</p>
+                    <p>$&nbsp;{{producto.precio}}</p>
+                    <p>{{producto.descripcion}}</p>
+                    <p> <span class="badge bg-info">{{producto.cantidad}}</span></p>
+                    <p>{{producto.codigo}}</p>
+                    <p>{{producto.id_categoria.categoria}}</p>
+                    <p>{{producto.fecha_creacion | date:'dd-MM-yyyy'}}</p>
                 </div>
                 <div class="card-footer">
                     <div class="form-group">

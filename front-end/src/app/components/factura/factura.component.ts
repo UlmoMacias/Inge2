@@ -8,7 +8,7 @@ import { Articulo } from '../../_models/articulo'
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router'
 import { ProductosService } from 'src/app/_services/productos.service';
-
+import Swal from 'sweetalert2';
 
 declare var $: any
 
@@ -22,8 +22,10 @@ export class FacturaComponent implements OnInit {
   facturas: Factura[] | any
   articulos: Articulo[] | any
   productos: Producto[] | any
+  factura : Factura
 
-  constructor(private route: ActivatedRoute, private facturaService: FacturaService, private productosService: ProductosService) { }
+  constructor(private route: ActivatedRoute, private facturaService: FacturaService, 
+    private productosService: ProductosService) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -33,57 +35,61 @@ export class FacturaComponent implements OnInit {
   }
   getFacturas() {
 
-    this.facturas = [new Factura(1, new Date("11 08 2019 "), this.rfc, 12, 234, 123.45, 5656, [new Articulo(1, 123, "codigo", 34, 56, 1, 12, 123), new Articulo(2, 123, "codigo1", 34, 56, 1, 12, 123), new Articulo(3, 123, "codigo2", 34, 56, 1, 12, 123)])]
-    //    this.facturaService.getFacturas(this.rfc).subscribe(
-    //      res => {
-    //        this.facturas = res
-    //      },
-    //      err => {
-    //        console.error(err)
-    //      }
-    //    )
-
+    //this.facturas = [new Factura(1, new Date("11 08 2019 "), this.rfc, 12, 234, 123.45, 5656, [new Articulo(1, 123, "codigo", 34, 56, 1, 12, 123), new Articulo(2, 123, "codigo1", 34, 56, 1, 12, 123), new Articulo(3, 123, "codigo2", 34, 56, 1, 12, 123)])]
+    this.facturas = []    
+    this.facturaService.getFacturas(this.rfc).subscribe(
+          res => {
+            this.facturas = res
+            console.log("facturas")
+          },
+          err => {
+            console.log("no se encontraron facturas !")
+            console.error(err)
+          }
+        )
   }
 
   eliminaFactura(id_factura: number) {
-    console.log("eliminaFactura: " + id_factura)
-  }
-
-  editarFactura(id_factura: number) {
-    console.log("editar factura: " + id_factura)
-  }
-
-
-  getProductos() {
-    this.productos = [new Producto(1, "codigo", "nombre", "describe", 1, 2, new Date("12 12 1997"), 1)]
-
-  }
-
-  detalleArticulos(id_factura: number) {
-    for (let a of this.facturas) {
-      if (id_factura == a.id) {
-        this.articulos = a.articulos
-
+    this.facturaService.deleteFactura(id_factura).subscribe(
+      res => {
+        this.showSucces("¡Factura eliminada! \n\n ❌")
+        this.getFacturas()
+      },
+      err => {
+        this.showFail("No se pudo eliminar \n\n 😭")
       }
-    }
+    )
+  }
 
+
+  detalleArticulos(factura: Factura) {
+
+    this.factura = factura
+    this.articulos = factura.articulos
+    console.log(this.articulos)
     $("#nuevo").modal({
       backdrop: 'static'
     });
     $("#nuevo").modal("show")
   }
 
-  detallesProducto(codigo: String) {
-    this.productos = [new Producto(1, "codigo", "nombre", "describe", 1, 2, new Date("12 12 1997"), 1)]
-    //    this.productos.getProducto(codigo).subscribe(
-    //      res => {
-    //        this.productos = res
-    //      },
-    //      err => {
-    //        console.error(err)
-    //      }
-    //    )
+  getProductos(codigo){
+    console.log("producto: "+codigo)
+        
+        this.productosService.getProducto(codigo).subscribe(
+          res => {
+            this.productos = [res]
+            console.log(res)
+          },
+          err => {
+            console.error(err)
+          }
+        )
+  }
 
+  detallesProducto(codigo: String) {
+    
+    this.getProductos(codigo)
 
     $("#nuevo").modal("hide")
 
@@ -95,6 +101,20 @@ export class FacturaComponent implements OnInit {
 
   }
 
+  
+  showFail(message){
+    Swal.fire({
+      icon: 'error',
+      title: message
+      
+    });
+  }
 
-
+  showSucces(message){
+    Swal.fire({
+      icon: 'success',
+      title: message,
+    });
+  }
 }
+

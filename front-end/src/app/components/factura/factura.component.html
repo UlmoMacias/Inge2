@@ -9,21 +9,20 @@
                 href="clientes/facturas/nueva?rfc={{rfc}}"><i class="fas fa-plus"></i>&nbsp;Nueva Factura</a>
         </button>
         <br>
-        <br>
+
         <img src="http://drive.google.com/uc?export=view&id=1gKwNDwbGhJJIGCEGqywQs8F-9c9ma_Oe" style="width: 400px; height:400px " />
-        <br>
-        <br>
+
+
         <div class="alert alert-danger text-center">
             <strong>
                 <h5>¡No hay Facturas! </h5>
             </strong> Agrega una
         </div>
-
     </div>
 
 
 
-    <h3 class="text-center" *ngIf="facturas.length > 0">Facturas del Cliente <br> <span class="badge rounded-pill bg-primary"> {{rfc}}</span> <br></h3>
+    <h3 class="text-center" *ngIf="facturas.length > 0">Facturas del Cliente <br> rfc: <span class="badge rounded-pill bg-primary"> {{rfc}}</span> <br></h3>
     <div class="text-center" *ngIf="facturas.length > 0">
         <button class="btn btn-success btn-sm"><a style="color: white; text-decoration:none;"
                 href="clientes/facturas/nueva?rfc={{rfc}}"><i class="fas fa-plus"></i>&nbsp;Nueva Factura</a></button>
@@ -43,7 +42,7 @@
                     <p>{{factura.subtotal}}</p>
                     Impuestos
                     <p>{{factura.taxes}}</p>
-                    <p><button class="btn btn-info" (click)="detalleArticulos(factura.id)">Articulos <br><i
+                    <p><button class="btn btn-info" (click)="detalleArticulos(factura)">Articulos <br><i
                                 class="fas fa-barcode"></i></button></p>
                     Total
                     <p>{{factura.total}}</p>
@@ -69,6 +68,7 @@
             <div class=" text-center modal-header ">
                 <h5 class="modal-title">Detalles de Articulos</h5>
             </div>
+
             <div class="modal-body">
                 <div *ngFor="let articulo of articulos">
                     <div class="card  mb-3">

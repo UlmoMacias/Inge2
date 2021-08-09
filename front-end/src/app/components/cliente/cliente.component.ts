@@ -27,6 +27,7 @@ export class ClienteComponent implements OnInit {
 
   ngOnInit(): void {
 
+
   this.clienteForm = this.formBuilder.group({ 
       id : [''],
       nombres : ['', Validators.required],
@@ -35,39 +36,40 @@ export class ClienteComponent implements OnInit {
       correo: ['', Validators.required],
       region: ['', Validators.required]
     })
+    this.getClientes()
+    this.getRegiones()
 
-  this.getClientes()
-  this.getRegiones()
 
   }
 
 
   getClientes(){
-
-    this.clientes = [new Cliente(1,"nombre", "apellido", "rfc1", "correo", 1),new Cliente(1,"nombre", "apellido", "rfc2", "correo", 2)]
-//    this.clienteService.getClientes().subscribe(
-//    res => {
-//      this.clientes = res
-//      console.log(res)
-//      },
-//      err => {
-//        console.log(err)
-//      }
-//)
+    this.clientes = []
+    this.clienteService.getClientes().subscribe(
+    res => {
+      this.clientes = res
+      console.log(JSON.stringify(this.clientes))
+      },
+      err => {
+        console.log(err)
+      }
+    )
     
   }
 
   getRegiones(){
-    this.regiones = [new Region(1, "oaxaca"),new Region(2, "oaxaca2")]
-//    this.regionService.getRegiones().subscribe(
-//      res=>{
-//        this.regiones = res
-//      },
-//      err=>{
-//        console.error(err)
-//      }
-//
-//    )
+
+    this.regiones = []
+    this.regionService.getRegiones().subscribe(
+      res=>{
+        this.regiones = res
+        console.log(res)
+      },
+      err=>{
+        console.error(err)
+      }
+
+    )
   }
 
   agregarCliente(){
@@ -79,7 +81,7 @@ export class ClienteComponent implements OnInit {
   buscaRegion(region: String){
     for (let i of this.regiones){
       if (region == i.region){
-        return i.id
+        return i
       }
     }
   }
@@ -87,38 +89,27 @@ export class ClienteComponent implements OnInit {
     console.log(JSON.stringify( this.clienteForm.value));
     this.submitted = true
     if(this.clienteForm.invalid){
-      console.log("Formulario invalido")
+      this.showFail("hacen falta datos \n\n 😢")
       return
     }
-    
-    const id_region = this.buscaRegion(this.clienteForm.value.region)
     const newCliente =  new Cliente(null,
                               this.clienteForm.value.nombres, 
                               this.clienteForm.value.apellidos, 
                               this.clienteForm.value.rfc, 
                               this.clienteForm.value.correo,
-                              id_region)
+                              this.buscaRegion(this.clienteForm.value.region))
                               
-//    this.clienteService.createCliente(newCliente).subscribe(
-//      res =>{
-//
-//        this.submitted=false
-//        $("#nuevo").modal("hide")
-//        this.showSucces("Agregado!")
-//        this.getClientes()
-//      },
-//      err => {
-      
-//        this.showFail("Algo salio mal ")
-//
-//      }
-//    )
-
-
-    this.submitted=false
-    $("#nuevo").modal("hide")
-    this.showSucces("Agregado!")
-    
+    this.clienteService.createCliente(newCliente).subscribe(
+      res =>{
+        this.submitted=false
+        $("#nuevo").modal("hide")
+        this.showSucces("Agregado! \n\n 😎")
+        this.getClientes()
+      },
+      err => {    
+        this.showFail("No se pudo agregar \n\n 😢")
+      }
+    )   
     
   }
 

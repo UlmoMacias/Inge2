@@ -8,6 +8,7 @@ import {Cliente} from '../_models/cliente'
 export class ClienteService {
 
   API_URI = 'http://localhost:8080';
+  
 
   constructor(private http: HttpClient) { }
 
@@ -15,8 +16,8 @@ export class ClienteService {
     return this.http.get(this.API_URI+"/cliente");
   }
 
-  getCliente(id: number){
-    return this.http.get(this.API_URI+"/cliente/"+id)
+  getCliente(rfc: String){
+    return this.http.get(this.API_URI+"/cliente/"+rfc)
   }
 
   createCliente(cliente : Cliente){

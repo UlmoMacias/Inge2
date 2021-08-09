@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 
 <body>
-    <div class="position-relative overflow-hidden p-3 p-md5 m-md-3 text-center -bg-light">
+    <div class="position-relative p-2 p-md5 m-md-2 text-center -bg-light">
         <div class="col-md-5 p-lg-5 mx-auto my-5">
             <h1 class="display-4 font-weight-normal">Acerca de</h1>
             <p class="lean font-weight-normal">
@@ -9,15 +9,26 @@
             </p>
 
         </div>
-        <img src="http://drive.google.com/uc?export=view&id=18SNevGr5xa0ZxUmHuL1YRUCgI5U48eq8" style="min-width: 300px; " />
+        <img src="http://drive.google.com/uc?export=view&id=18SNevGr5xa0ZxUmHuL1YRUCgI5U48eq8" style="min-width: 300px; " (click)="info()" />
     </div>
 
-    <div class="position-relative overflow-hidden p-2 p-md5 m-md-3 text-center -bg-light">
-        <div class="col-md-5 p-lg-5 mx-auto my-5">
-            <h1 class="display-4 font-weight-normal">Team</h1>
-            <p class="lean font-weight-normal">
-                Castro Mejía Jonatan Alejandro <br> Leyva Castillo Luis Angel <br> Macías Gómez Jorge <br> Miranda Salazar Dafne Michel <br>
-            </p>
+
+</body>
+
+<div class="modal fade" id="modal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <h4 class="display-4 font-weight-normal text-center">Team</h4>
+                <p class="lean font-weight-normal text-center">
+                    Castro Mejía Jonatan Alejandro <br> Leyva Castillo Luis Angel <br> Macías Gómez Jorge <br> Miranda Salazar Dafne Michel <br>
+                    <br>
+                    <img src="http://drive.google.com/uc?export=view&id=18SNevGr5xa0ZxUmHuL1YRUCgI5U48eq8" style="width: 300px; " />
+                </p>
+            </div>
+
+
         </div>
     </div>
-</body>
+</div>

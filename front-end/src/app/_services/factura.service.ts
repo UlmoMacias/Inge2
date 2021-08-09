@@ -13,8 +13,12 @@ export class FacturaService {
 
 //hay que checar esto
 
+  get(){
+    return this.http.get(this.API_URI+'/facturas')
+  }
+
   getFacturas(rfc: String){
-    return this.http.get(this.API_URI+"/facturas/"+rfc)
+    return this.http.get(this.API_URI+"/factura/"+rfc)
   }
 
   getFactura(id: number){

@@ -31,10 +31,13 @@ export class ArticulosComponent implements OnInit {
   agregando: Producto
   cantidad : Cantidad [] = []
   submitted = false
-  generar = false
+  
   
   constructor(private route: ActivatedRoute,
-    private articulosService: ArticulosService, private formBuilder: FormBuilder) { };
+    private articulosService: ArticulosService, 
+    private formBuilder: FormBuilder,
+    private productosService: ProductosService,
+    private facturaService: FacturaService) { };
 
   ngOnInit(): void {
 
@@ -52,11 +55,18 @@ export class ArticulosComponent implements OnInit {
   };
 
   getProductos(){
-    
-    this.productos = [new Producto(1, "codigo1", "p1", "descripcion", 1, 100, new Date("03 08 2021"), 12),
-                      new Producto(2, "codigo2", "p2", "desacripcion", 1, 100, new Date("03 08 2021"), 12),
-                      new Producto(3, "codigo3", "p3", "desacripcion", 1, 100, new Date("03 08 2021"), 12),
-                      new Producto(4, "codigo4", "p4", "desacripcion", 1, 100, new Date("03 08 2021"), 12)]
+    this.productos = []
+    this.productosService.getProductos().subscribe(
+      res => {
+        this.productos = res
+        console.log(JSON.stringify( res))
+      },
+      err => {
+        console.error(err)
+      }
+    )
+
+
 
   }
   agregar(producto: Producto){
@@ -104,9 +114,21 @@ export class ArticulosComponent implements OnInit {
   generarFactura(){
 
     for (let i of this.cantidad){
-      this.articulos.push(new Articulo(null,i.cantidad, i.producto.codigo, 0,null, null, null, null ))
+      this.articulos.push(new Articulo(null,i.cantidad, i.producto.codigo, .5,null, null, null, null ))
+      this.articulosService.createArticulo(new Articulo(null,i.cantidad, i.producto.codigo, .5,null, null, null, null )).subscribe(
+      
+          res => {    
+            console.log(res)
+            console.log("subiendo...")
+          }, 
+          err => {
+            console.log("no se pudo subir")
+
+        }
+      )
+
     }
-    this.generar = true
+    
     var today = new Date();
       today.setDate(today.getDate() + 1);
       var dd = String(today.getDate()).padStart(2, '0');
@@ -116,11 +138,18 @@ export class ArticulosComponent implements OnInit {
       const hoy = yyyy + '-' + mm + '-' + dd;
 
       const factura = new Factura (null, new Date (hoy), this.rfc, null, null, null,null, this.articulos)
-      
 
-      console.log(factura)
-      $("#carrito").modal("hide")
-      this.showSucces("Factura Creada!")
+      this.facturaService.createFactura(factura).subscribe(
+        res => {
+          console.log(res)
+          console.log(factura)
+          $("#carrito").modal("hide")
+          this.showSucces("Factura Creada!")
+        },
+        err => {
+          this.showFail("No se pudo crear la factura :C ")
+        }
+      ) 
 
   }
 
