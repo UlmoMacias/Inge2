@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
@@ -49,4 +50,7 @@ public class Cliente {
 	@ManyToOne
 	@JoinColumn(name = "ID_Region")
 	private Region idRegion;
+	
+	@JsonIgnore
+	private Integer status;
 }

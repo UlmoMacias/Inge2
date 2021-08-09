@@ -25,9 +25,13 @@ public class ServiceProductoImp implements ServiceProducto {
 	public List<Producto> getProductos() {
 		return productoRepository.getProductos();
 	}
-
+	
 	@Override
 	public Producto getProducto(String codigo) {
+		return productoRepository.getProducto(codigo);
+	}
+	@Override
+	public Producto getProductoA(String codigo) {
 		try {
 			Producto p  = ((Optional<Producto>) productoRepository.findById(codigo)).get();
 			return p;

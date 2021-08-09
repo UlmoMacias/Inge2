@@ -12,7 +12,7 @@ public interface ServiceCliente {
 	
 	public void createCliente(Cliente cliente);
 	
-	public void updateCliente(Cliente cliente, Integer id);
+	public void updateCliente(Cliente cliente, String id);
 	
-	public void deleteCliente(Integer id);
+	public void deleteCliente(String id);
 }
