@@ -54,18 +54,18 @@ public class ControllerCliente {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<HttpStatus> updateCliente(@Valid @RequestBody Cliente cliente, @PathVariable("id") Integer id, BindingResult bindingResult){
+	@PutMapping("/{rfc}")
+	public ResponseEntity<HttpStatus> updateCliente(@Valid @RequestBody Cliente cliente, @PathVariable("rfc") String rfc, BindingResult bindingResult){
 		if(bindingResult.hasErrors()) {
 			throw new ApiException(HttpStatus.BAD_REQUEST,bindingResult.getAllErrors().get(0).getDefaultMessage());
 		}
-		serviceCliente.updateCliente(cliente, id);
+		serviceCliente.updateCliente(cliente, rfc);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<HttpStatus> deleteCliente(@PathVariable("id") Integer id){
-		serviceCliente.deleteCliente(id);
+	@DeleteMapping("/{rfc}")
+	public ResponseEntity<HttpStatus> deleteCliente(@PathVariable("rfc") String rfc){
+		serviceCliente.deleteCliente(rfc);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

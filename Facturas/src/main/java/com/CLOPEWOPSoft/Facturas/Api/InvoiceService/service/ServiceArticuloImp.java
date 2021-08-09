@@ -77,7 +77,7 @@ public class ServiceArticuloImp implements ServiceArticulo {
 	
 	private Producto getCodigoProducto(String codigo) {
 		try {
-			return sp.getProducto(codigo);
+			return sp.getProductoA(codigo);
 		}catch(Exception e) {
 			throw new ApiException(HttpStatus.NOT_FOUND,"El id "+ codigo+" no es valido");
 		}

@@ -10,6 +10,8 @@ public List<Producto> getProductos();
 	
 	public Producto getProducto(String codigo);
 	
+	public Producto getProductoA(String codigo);
+	
 	public void createProducto(Producto producto);
 	
 	public void updateProducto(Producto producto, String codigo);

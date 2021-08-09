@@ -17,6 +17,10 @@ public interface ProductoRepository extends JpaRepository<Producto,String>{
 	@Query(value = "SELECT * FROM Producto WHERE Status = 1", nativeQuery = true)
 	List<Producto> getProductos();
 	
+	
+	@Query(value = "SELECT * FROM Producto WHERE Codigo = :codigo AND Status = 1", nativeQuery = true)
+	Producto getProducto(@Param("codigo") String codigo);
+	
 	@Modifying
 	@Transactional
 	@Query(value = "CALL st_create_producto(:codigo , "
