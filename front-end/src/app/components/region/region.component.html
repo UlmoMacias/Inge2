@@ -1,1 +1,35 @@
-<p>region works!</p>
+<app-navbar></app-navbar>
+
+<div class="container-fluid">
+    <br>
+    <div class="col-md-4 mx-auto">
+        <div class="card d-flex justify-content-between align-items-center">
+            <div class="card-body">
+
+                <h4 class="text-center"> Nueva Region <i class="fas fa-plus"></i></h4>
+                <br>
+                <form [formGroup]="regionForm" (ngSubmit)="crearRegion()">
+                    <div class="form-group">
+                        <div class="form-floating mb-2">
+                            <input type="text" id="region" formControlName="region" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.region.errors }" placeholder="región">
+                            <label>Región</label>
+                            <div *ngIf="submitted && f.region.errors" class="invalid-feedback">
+                                <div *ngIf="f.region.errors.required">Es necesario ingresar un Region</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block form-control">Guardar</button>
+                    </div>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<app-footer></app-footer>

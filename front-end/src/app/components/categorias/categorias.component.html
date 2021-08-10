@@ -1,1 +1,37 @@
-<p>categorias works!</p>
+<app-navbar></app-navbar>
+
+<div class="container-fluid">
+    <br>
+    <div class="col-md-4 mx-auto">
+        <div class="card d-flex justify-content-between align-items-center">
+            <div class="card-body">
+
+                <h4 class="text-center"> Nueva Categoria <i class="fas fa-plus"></i></h4>
+                <br>
+                <form [formGroup]="categoriaForm" (ngSubmit)="crearCategoria()">
+                    <div class="form-group">
+                        <div class="form-floating mb-2">
+                            <input type="text" id="categoria" formControlName="categoria" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.categoria.errors }" placeholder="categoria">
+                            <label>Categoria</label>
+                            <div *ngIf="submitted && f.categoria.errors" class="invalid-feedback">
+                                <div *ngIf="f.categoria.errors.required">Es necesario ingresar un categoria</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block form-control">Guardar</button>
+                    </div>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<app-footer></app-footer>
