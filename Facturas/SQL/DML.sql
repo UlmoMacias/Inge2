@@ -6,6 +6,7 @@ CALL st_delete_region(1);
 
 
 INSERT INTO Cliente VALUES(1,"Jonatan","Castro Mejia","JCM","@Joni",1,1);
+CALL st_create_cliente("Jonatan","Castro Mejia","JCM","@Joni",1);
 CALL st_create_cliente("LUIS", "ANGEL", "ACM", "@Howke",1);
 CALL st_create_cliente("LUIS", "ANGEL", "ACMA", "@Howke",1);
 

@@ -12,18 +12,20 @@ DECLARE
 	DECLARE v_count INT DEFAULT 1;
 IF EXISTS (SELECT RFC FROM Cliente WHERE RFC = p_rfc)
 	THEN
-		SIGNAL SQLSTATE '50000' SET MESSAGE_TEXT = 'El cliente ya está registrado';
-	END IF;
-SET v_size = (SELECT count(ID) FROM Cliente);
-WHILE v_count <= v_size
-	DO
-		IF EXISTS (SELECT ID FROM Cliente WHERE id = v_count)
-			THEN
-				SET v_count = v_count + 1;
-			ELSE
-				SET v_size = 0;
-			END IF;
-	END WHILE;
-INSERT INTO Cliente VALUES(v_count,p_nombre,p_apellidos, p_rfc, p_correo,p_id_region,1);
+		UPDATE Cliente SET Status = 1 WHERE RFC = p_rfc;
+ELSE
+	SET v_size = (SELECT count(ID) FROM Cliente);
+	WHILE v_count <= v_size
+		DO
+			IF EXISTS (SELECT ID FROM Cliente WHERE id = v_count)
+				THEN
+					SET v_count = v_count + 1;
+				ELSE
+					SET v_size = 0;
+				END IF;
+		END WHILE;
+	INSERT INTO Cliente VALUES(v_count,p_nombre,p_apellidos, p_rfc, p_correo,p_id_region,1);
+END IF;
 END;
 //
+-- DROP Procedure st_create_cliente;
