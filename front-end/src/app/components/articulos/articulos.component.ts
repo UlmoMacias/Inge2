@@ -107,27 +107,51 @@ export class ArticulosComponent implements OnInit {
 
   }
 
-  eliminarDeCarrito(id){
-    console.log(id)
-  }
 
   generarFactura(){
 
     for (let i of this.cantidad){
       this.articulos.push(new Articulo(null,i.cantidad, i.producto.codigo, .5,null, null, null, null ))
-      this.articulosService.createArticulo(new Articulo(null,i.cantidad, i.producto.codigo, .5,null, null, null, null )).subscribe(
-      
-          res => {    
-            console.log(res)
-            console.log("subiendo...")
+      var  p = new Producto( i.producto.id,
+                             i.producto.codigo, 
+                             i.producto.nombre, 
+                             i.producto.descripcion, 
+                             i.producto.cantidad - i.cantidad, 
+                             i.producto.precio, 
+                             i.producto.fecha_creacion, 
+                            i.producto.id_categoria)
+      console.log("newP: "+ JSON.stringify(p))
+
+      this.productosService.updateProduct(i.producto.id, p).subscribe(
+          res => {
+            console.log("resupdate : "+JSON.stringify( res))
+            console.log("update porductos")
+            
           }, 
           err => {
-            console.log("no se pudo subir")
+              console.log("error update articulos:"+ JSON.stringify( err))
+          }
+
+        )
+
+        var a = new Articulo(null,i.cantidad, i.producto.codigo, .5,null, null, null, null )
+          console.log("articulo: "+ JSON.stringify (a))
+
+      this.articulosService.createArticulo(a).subscribe(
+      
+          res => {    
+            console.log("res subiendo articulos: "+JSON.stringify( res))
+            console.log("subiendo articulos...")
+          }, 
+          err => {
+            console.log("error createArticulo: "+  err)
 
         }
       )
 
     }
+
+    this.getProductos()
     
     var today = new Date();
       today.setDate(today.getDate() + 1);

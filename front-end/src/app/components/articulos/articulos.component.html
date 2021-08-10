@@ -51,15 +51,15 @@
                     <div class="card  mb-3">
                         <div class="card-header d-flex justify-content-between align-items-center ">
                             {{producto.producto.nombre}}
-                            <button class="btn btn-danger" (click)="eliminarDeCarrito(producto.id)"> <i class="fas fa-trash"></i></button>
+
 
                         </div>
                         <div class="card-body text-center">
                             <p>$ &nbsp;{{producto.producto.precio}}</p>
                             <p>{{producto.producto.descripcion}}</p>
-                            <p>{{producto.producto.cantidad}}</p>
+                            <p>Agregados a carrito: <span class="badge bg-success"> {{producto.cantidad}}</span></p>
                             <p>{{producto.producto.codigo}}</p>
-                            <p>cat: {{producto.producto.id_categoria}}</p>
+                            <p>{{producto.producto.id_categoria.categoria}}</p>
                             <p>{{producto.producto.fecha_creacion | date:'dd-MM-yyyy'}}</p>
                         </div>
                     </div>
