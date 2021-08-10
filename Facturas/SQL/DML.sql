@@ -19,6 +19,6 @@ CALL st_create_producto("0000000000000","Producto de prueba","Producto Prueba",1
 
 INSERT INTO Factura VALUES(1,CURRENT_DATE(),1,"JCM");
 
-CALL st_create_articulo("0000000000000",10,.5,1,1);
+CALL st_create_articulo("0000000000000",10,.5,1);
 INSERT INTO Articulo VALUES(1,"0000000000000",10,.5,1);
 
