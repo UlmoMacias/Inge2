@@ -23,6 +23,7 @@ export class FacturaComponent implements OnInit {
   articulos: Articulo[] | any
   productos: Producto[] | any
   factura : Factura
+  aux_id_factura : number
 
   constructor(private route: ActivatedRoute, private facturaService: FacturaService, 
     private productosService: ProductosService) { }
@@ -49,11 +50,18 @@ export class FacturaComponent implements OnInit {
         )
   }
 
-  eliminaFactura(id_factura: number) {
-    this.facturaService.deleteFactura(id_factura).subscribe(
+  eliminaFactura(id_factura: number){
+    this.aux_id_factura = id_factura
+    $("#preguntar").modal("show")
+  }
+
+  eliminaFacturaBase() {
+    this.facturaService.deleteFactura(this.aux_id_factura).subscribe(
       res => {
+        $("#preguntar").modal("hide")
         this.showSucces("¡Factura eliminada! \n\n ❌")
         this.getFacturas()
+        
       },
       err => {
         this.showFail("No se pudo eliminar \n\n 😭")

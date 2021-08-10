@@ -23,7 +23,7 @@ export class ProductosService {
     return this.http.post(this.API_URI+'/producto' , producto)
   }
 
-  updateProduct(codigo: number, producto : Producto){
+  updateProduct(codigo: String, producto : Producto){
     return this.http.put(this.API_URI+'/producto/'+codigo, producto)
   }
   

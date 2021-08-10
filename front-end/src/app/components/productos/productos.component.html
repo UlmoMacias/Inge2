@@ -1,1 +1,95 @@
-<p>productos works!</p>
+<app-navbar></app-navbar>
+
+<div class="container-fluid">
+    <div class="col-md-4 mx-auto">
+        <div class="card d-flex justify-content-between align-items-center">
+            <div class="card-body">
+                <br>
+                <h4 class="text-center"> Nuevo Producto <i class="fas fa-plus"></i></h4>
+
+                <form [formGroup]="productoForm" (ngSubmit)="crearProducto()">
+                    <div class="form-group">
+                        <div class="form-floating mb-2">
+                            <input type="text" id="nombre" formControlName="nombre" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }" placeholder="nombre">
+                            <label>Nombre</label>
+                            <div *ngIf="submitted && f.nombre.errors" class="invalid-feedback">
+                                <div *ngIf="f.nombre.errors.required">Es necesario ingresar un nombre</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-floating mb-2">
+                            <textarea type="text" id="descripcion" formControlName="descripcion" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }" placeholder="descripcion" style="min-height: 150px"></textarea>
+                            <label>Descripcion</label>
+                            <div *ngIf="submitted && f.descripcion.errors" class="invalid-feedback">
+                                <div *ngIf="f.descripcion.errors.required">Es necesario ingresar una descripcion</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-floating mb-2">
+                            <input type="number" id="cantidad" formControlName="cantidad" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.cantidad.errors }" placeholder="cantidad" min="1">
+                            <label>Cantidad</label>
+                            <div *ngIf="submitted && f.cantidad.errors" class="invalid-feedback">
+                                <div *ngIf="f.cantidad.errors.required">Es necesario ingresar una cantidad</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-floating mb-2">
+                            <input type="number" id="precio" formControlName="precio" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.precio.errors }" placeholder="precio" min="1">
+                            <label>Precio</label>
+                            <div *ngIf="submitted && f.precio.errors" class="invalid-feedback">
+                                <div *ngIf="f.precio.errors.required">Es necesario ingresar un precio</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="form-floating mb-2">
+                            <input type="number" id="codigo" formControlName="codigo" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.codigo.errors }" placeholder="codigo" min="1">
+                            <label>Código</label>
+                            <div *ngIf="submitted && f.codigo.errors" class="invalid-feedback">
+                                <div *ngIf="f.codigo.errors.required">Es necesario ingresar un codigo</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label for="exampleSelect1" class="form-label mt-4">Categoria</label>
+                        <div *ngIf="submitted && f.categorias.errors" class="invalid-feedback">
+                            <div *ngIf="f.categorias.required">La categoria es obligatoria</div>
+                        </div>
+
+                        <select class="form-control" id="categorias" formControlName="categorias" placeholder="categoria">
+
+                            <option selected >selecicona</option>
+                            <ng-container *ngFor="let categoria of categorias">
+                                <option >{{categoria.categoria}}</option>
+                            </ng-container>
+                        </select>
+
+
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block form-control">Guardar</button>
+                    </div>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<app-footer></app-footer>

@@ -10,27 +10,30 @@
     </div>
     <br>
     <div class="row">
-        <div class="col-md-3 " *ngFor="let producto of productos">
-            <div class="card" style="min-height: 200px; min-width: 100px;" *ngIf="producto.cantidad > 0">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h4>{{producto.nombre}}</h4>
-                </div>
-                <div class="card-body text-center">
-                    <p>$&nbsp;{{producto.precio}}</p>
-                    <p>{{producto.descripcion}}</p>
-                    <p> <span class="badge bg-info">{{producto.cantidad}}</span></p>
-                    <p>{{producto.codigo}}</p>
-                    <p>{{producto.id_categoria.categoria}}</p>
-                    <p>{{producto.fecha_creacion | date:'dd-MM-yyyy'}}</p>
-                </div>
-                <div class="card-footer">
-                    <div class="form-group">
-                        <button class="btn-success btn-block form-control" (click)="agregar(producto)"><i class="fas fa-cart-plus"></i> &nbsp;Añadir al carrito </button>
+        <div *ngFor="let producto of productos">
+            <div class="col-md-4 mx-auto">
+                <div class="card mb-3" *ngIf="producto.cantidad > 0">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h4>{{producto.nombre}}</h4>
                     </div>
+                    <div class="card-body text-center">
+                        <p>$&nbsp;{{producto.precio}}</p>
+                        <p>{{producto.descripcion}}</p>
+                        <p> <span class="badge bg-info">{{producto.cantidad}}</span></p>
+                        <p>{{producto.codigo}}</p>
+                        <p>{{producto.id_categoria.categoria}}</p>
+                        <p>{{producto.fecha_creacion | date:'dd-MM-yyyy'}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="form-group">
+                            <button class="btn-success btn-block form-control" (click)="agregar(producto)"><i class="fas fa-cart-plus"></i> &nbsp;Añadir al carrito </button>
+                        </div>
 
+                    </div>
                 </div>
             </div>
         </div>
+        <br>
     </div>
 
 

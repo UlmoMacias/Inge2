@@ -122,7 +122,7 @@ export class ArticulosComponent implements OnInit {
                             i.producto.id_categoria)
       console.log("newP: "+ JSON.stringify(p))
 
-      this.productosService.updateProduct(i.producto.id, p).subscribe(
+      this.productosService.updateProduct(i.producto.codigo, p).subscribe(
           res => {
             console.log("resupdate : "+JSON.stringify( res))
             console.log("update porductos")
@@ -151,7 +151,6 @@ export class ArticulosComponent implements OnInit {
 
     }
 
-    this.getProductos()
     
     var today = new Date();
       today.setDate(today.getDate() + 1);
@@ -167,6 +166,7 @@ export class ArticulosComponent implements OnInit {
         res => {
           console.log(res)
           console.log(factura)
+          this.getProductos()
           $("#carrito").modal("hide")
           this.showSucces("Factura Creada!")
         },
