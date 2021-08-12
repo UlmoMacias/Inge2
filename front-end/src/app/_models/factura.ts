@@ -6,7 +6,7 @@ export class Factura{
     rfc_cliente :String 
     subtotal: number
     codigo : number
-    taxes :number 
+    impuestos :number 
     total: number
     articulos : Articulo[]
 
@@ -25,7 +25,7 @@ export class Factura{
     this.rfc_cliente = rfc_cliente
     this.subtotal = subtotal
     this.codigo = codigo
-    this.taxes = taxes
+    this.impuestos = taxes
     this.total = total
     this.articulos = articulos
   }
